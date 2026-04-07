@@ -1,7 +1,7 @@
 import os
 import json
 import base64
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -59,7 +59,8 @@ def submit():
         else:
             tags_str = str(tags)
 
-        now = datetime.now().strftime('%d.%m.%Y %H:%M')
+        msk = timezone(timedelta(hours=3))
+        now = datetime.now(msk).strftime('%d.%m.%Y %H:%M')
 
         sheet = get_sheet()
         sheet.append_row([now, name, phone, contact, comment, tags_str])
