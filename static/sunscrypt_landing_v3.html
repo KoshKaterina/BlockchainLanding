@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0D0D0D">
-<title>Sunscrypt — надёжный партнёр в мире цифровых активов</title>
+<title>Sunscrypt — надёжный партнёр в мире цифровых активов</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -84,18 +84,18 @@
     gap: 6px;
     color: var(--white);
     text-decoration: none;
-    padding: 6px 12px;
-    border: 1px solid rgba(93,184,255,0.2);
+    padding: 6px;
+    border: none;
     border-radius: 2px;
-    transition: color 0.2s, border-color 0.2s;
+    transition: color 0.2s;
     font-size: 13px;
     white-space: nowrap;
   }
 
+  .contact-link svg { width: 20px; height: 20px; }
+
   .contact-link:hover {
-    border-color: var(--label);
     color: var(--label);
-    background: rgba(93,184,255,0.05);
   }
 
   .contact-link svg { flex-shrink: 0; }
@@ -252,7 +252,7 @@
     color: #ffffff;
     font-family: var(--font-body);
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 0.01em;
     text-transform: none;
     padding: 15px 28px;
@@ -278,7 +278,7 @@
     color: var(--white);
     font-family: var(--font-body);
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 0.01em;
     text-transform: none;
     padding: 15px 28px;
@@ -545,8 +545,10 @@
   }
 
   .brand-tag--blue {
-    background: linear-gradient(90deg, #00C2FF 0%, #0066FF 100%);
+    background: #D0D0D0;
     border: none;
+    color: #111111;
+    border-radius: 8px;
   }
 
   .product-ctas {
@@ -647,9 +649,8 @@
   .form-eyebrow {
     font-family: var(--font-display);
     font-size: 10px;
-    letter-spacing: 0.25em;
+    letter-spacing: 0.02em;
     color: var(--label);
-    text-transform: uppercase;
     margin-bottom: 12px;
   }
 
@@ -792,7 +793,7 @@
   .modal-close:hover { color: var(--white); }
 
   /* ─── BUSINESS ─── */
-  #business { background: var(--black); }
+  #business { background: var(--black); padding-top: 32px; padding-bottom: 8px; }
 
   .business-grid {
     display: grid;
@@ -846,7 +847,7 @@
   #media {
     background: var(--dark);
     text-align: center;
-    padding: 100px 40px;
+    padding: 60px 40px;
     position: relative;
     overflow: hidden;
   }
@@ -882,7 +883,7 @@
     color: var(--white-dim);
     font-size: 16px;
     line-height: 1.7;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
 
   .media-links {
@@ -913,6 +914,7 @@
   .media-link-icon {
     width: 40px;
     height: 40px;
+    margin: 8px 0;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1123,9 +1125,10 @@
     display: none;
     text-align: center;
     padding: 24px;
-    color: var(--label);
+    color: #5DB8FF;
     font-family: var(--font-display);
-    font-size: 14px;
+    font-size: 18px;
+    font-weight: 600;
     letter-spacing: 0.05em;
   }
 
@@ -1141,9 +1144,9 @@
   .header-logo { display: flex; }
   .header-contacts { gap: 4px; flex-wrap: nowrap; }
   .header-contacts span { display: none; }
-  .contact-link { padding: 7px 10px; }
+  .contact-link { padding: 7px; }
   .contact-link .contact-text { display: none; }
-  .contact-link svg { width: 13px; height: 13px; }
+  .contact-link svg { width: 18px; height: 18px; }
 
   /* HERO */
   .hero {
@@ -1185,7 +1188,7 @@
   }
 
   /* SECTIONS */
-  section { padding: 48px 20px; }
+  section { padding: 32px 20px; }
   .section-label { font-size: 12px; }
   .section-title { font-size: clamp(24px, 7vw, 30px); }
   .section-sub { font-size: 15px; }
@@ -1229,9 +1232,9 @@
   .business-card-desc { font-size: 15px; }
 
   /* MEDIA */
-  #media { padding: 48px 20px; }
+  #media { padding: 24px 20px; }
   .media-links { flex-direction: column; gap: 10px; }
-  .media-link { min-width: unset; width: 100%; flex-direction: column; text-align: center; padding: 24px 20px; gap: 12px; }
+  .media-link { min-width: unset; width: 100%; flex-direction: column; text-align: center; padding: 24px 20px; gap: 4px; }
   .media-link-info { text-align: center; }
   .media-link-info { text-align: center; }
   .media-link-name { font-size: 16px; }
@@ -1239,7 +1242,7 @@
   .media-link-desc { font-size: 13px; }
 
   /* GIVEAWAY */
-  #giveaway { padding: 48px 20px; }
+  #giveaway { padding: 32px 20px; }
   .giveaway-header { grid-template-columns: 1fr; gap: 32px; margin-bottom: 0; }
   .giveaway-form { padding: 28px 20px; }
   .prize-item { padding: 12px 16px; }
@@ -1396,10 +1399,10 @@
   <div class="hero-content">
     <p class="hero-eyebrow">Безопасность · Знания · Сообщество</p>
     <h1>Надёжный партнёр<br>в мире <em>цифровых</em><br>активов</h1>
-    <p class="hero-sub">Аппаратные кошельки, обмен криптовалюты, обучение и защита ваших активов. Оффлайн шоурум в Москве, работаем по всей России</p>
+    <p class="hero-sub">Аппаратные кошельки, обмен криптовалюты, обучение и защита ваших активов. Оффлайн шоурум в Москве, работаем по всей России</p>
     <div class="hero-ctas">
-      <a href="#products" class="btn-primary">Продукты и услуги</a>
-      <a href="#giveaway" class="btn-outline">Участвовать в розыгрыше</a>
+      <a href="#products" class="btn-primary">Продукты и услуги</a>
+      <a href="#giveaway" class="btn-outline">Участвовать в розыгрыше</a>
     </div>
   </div>
 
@@ -1417,60 +1420,50 @@
       </div>
       <div class="product-content">
         <h3 class="product-title">Аппаратные кошельки</h3>
+        <p style="font-size:14px;color:#5DB8FF;margin-bottom:16px;line-height:1.6;">Tangem · Keystone · Ledger · Trezor · и другие</p>
         <p style="font-size:14px;color:rgba(255,255,255,0.65);margin-bottom:16px;line-height:1.6;">а также ключи двухфакторной аутентификации, пластины для хранения сид-фраз, аксессуары</p>
-
-        <div class="brands-row">
-          <span class="brand-tag brand-tag--blue">Tangem</span>
-          <span class="brand-tag brand-tag--blue">Keystone</span>
-          <span class="brand-tag brand-tag--blue">Ledger</span>
-          <span class="brand-tag brand-tag--blue">Trezor</span>
-          <span class="brand-tag brand-tag--blue">SafePal</span>
-          <span class="brand-tag brand-tag--blue">и другие</span>
-        </div>
-
-        <p class="product-subtitle" style="margin-top:16px;">Шоурум в Москве · Доставка по РФ</p>
 
         <div class="features-list">
           <p style="font-weight:600; margin-bottom:10px; color:#fff;">Профессиональные консультанты расскажут</p>
           <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
-            <li class="features-list__item">Какой кошелёк подойдёт именно вам — с учётом задач, опыта и бюджета</li>
-            <li class="features-list__item">В чём различия популярных моделей и какие функции действительно важны</li>
-            <li class="features-list__item">Как защитить свои активы и избежать типичных ошибок</li>
+            <li class="features-list__item">Какой кошелёк подойдёт именно вам — с учётом задач, опыта и бюджета</li>
+            <li class="features-list__item">В чём различия популярных моделей и какие функции действительно важны</li>
+            <li class="features-list__item">Как защитить свои активы и избежать типичных ошибок</li>
           </ul>
-          <p style="margin-top:14px; color:rgba(255,255,255,0.55); font-size:14px;">Предоставляем техподдержку и гарантию 1 год на все устройства</p>
+          <p class="product-subtitle" style="margin-top:16px;margin-bottom:8px;">Шоурум в Москве · Доставка по РФ</p>
+          <p style="margin-top:14px; color:rgba(255,255,255,0.55); font-size:14px;">Предоставляем техподдержку и гарантию <span style="white-space:nowrap">1&nbsp;год</span> на все устройства</p>
         </div>
 
         <div class="product-ctas">
-          <a href="https://sunscrypt.ru" target="_blank" class="btn-primary">Выбрать кошелёк</a>
-          <button class="btn-outline" onclick="openModal('modal-wallet')">Записаться на консультацию</button>
+          <a href="https://sunscrypt.ru" target="_blank" class="btn-primary">Перейти на сайт магазина</a>
+          <button class="btn-outline" onclick="openModal('modal-wallet')">Подобрать кошелёк</button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- EXCHANGE -->
-  <p class="section-label" style="margin-top:40px;">Обменник</p>
+  <p class="section-label" style="margin-top:24px;">Обменник</p>
   <div class="product-card">
     <div class="product-card-inner">
       <div class="product-content" style="padding-top:28px;padding-bottom:28px;">
         <h3 class="product-title">Sunscrypt Exchange</h3>
-        <p class="product-subtitle">Наличные и онлайн · Рыночный курс</p>
+        <p class="product-subtitle">Наличные и онлайн · Безопасно и удобно</p>
 
         <ul class="features-list" style="margin-bottom:32px;">
-          <li><span style="display:inline;">Удобно — обмен фиата на криптовалюту в 50+ странах, на связи ежедневно с 9:00 до 22:00</span></li>
+          <li><span style="display:inline;">Обмен фиата на криптовалюты и криптовалюты на фиат в 50+ странах, на связи ежедневно с 9:00 до 22:00</span></li>
           <li><span style="display:inline;">Международные переводы — SWIFT/SEPA, ВЭД, Китай (CNY, Alipay/WeChat)</span></li>
-          <li><span style="display:inline;">Зарубежные карты и сервисы — Wise, Revolut, Zelle и другие</span></li>
-          <li><span style="display:inline;">Недвижимость — помощь с покупкой и продажей за рубежом</span></li>
+          <li><span style="display:inline;">Недвижимость — помощь с покупкой и продажей за рубежом</span></li>
         </ul>
 
         <div class="product-ctas">
-          <a href="https://t.me/sunscrypt_bot" target="_blank" class="btn-primary">Перейти в обменник</a>
+          <a href="https://t.me/sunscrypt_bot" target="_blank" class="btn-primary">Перейти в обменник</a>
         </div>
       </div>
     </div>
   </div>
 
-  <p class="section-label" id="academy" style="margin-top:40px;">Обучение</p>
+  <p class="section-label" id="academy" style="margin-top:24px;">Обучение</p>
   <div class="product-card">
     <div class="product-card-inner">
       <div class="product-visual">
@@ -1478,10 +1471,10 @@
       </div>
       <div class="product-content">
         <h3 class="product-title">Академия Sundemy</h3>
-        <p style="font-size:14px;color:rgba(255,255,255,0.65);margin-bottom:16px;line-height:1.6;">Освойте DeFi, Web3 и управление цифровыми активами — от основ до продвинутых стратегий</p>
-        <p class="product-subtitle">Практические задания, живые эфиры с экспертами и поддержка куратора на всём пути обучения</p>
+        <p style="font-size:14px;color:rgba(255,255,255,0.65);margin-bottom:16px;line-height:1.6;">Освойте DeFi, Web3 и управление цифровыми активами — от основ до продвинутых стратегий</p>
+        <p style="font-size:14px;color:#5DB8FF;margin-bottom:28px;line-height:1.6;">Практические задания, онлайн эфиры с экспертами и поддержка куратора на всём пути обучения</p>
         <div class="product-ctas">
-          <button class="btn-primary" onclick="openModal('modal-academy')">Записаться в лист ожидания</button>
+          <button class="btn-primary" onclick="openModal('modal-academy')">Записаться в лист ожидания</button>
         </div>
       </div>
     </div>
@@ -1492,7 +1485,7 @@
 <section id="services">
   <p class="section-label">Экспертная помощь</p>
   <h2 class="section-title">Персональные услуги</h2>
-  <p class="section-sub">Решаем нестандартные задачи — там, где нужен опытный взгляд и живое участие</p>
+  <p class="section-sub">Решаем нестандартные задачи — там, где нужен опытный взгляд и живое участие</p>
 
   <div class="services-grid">
     <!-- Service 1 -->
@@ -1501,7 +1494,7 @@
         <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
         <h3 class="service-title">Индивидуальные консультации</h3>
       </div>
-      <p class="service-desc">Комплексная настройка аппаратных кошельков, первые шаги в криптовалюте, продвинутые стратегии хранения и диверсификации активов, вопросы безопасности — запишем на консультацию со специалистом под ваш запрос</p>
+      <p class="service-desc">Опишите вашу задачу или вопрос — подберём специалиста и поможем разобраться</p>
       <button class="btn-ghost" onclick="openModal('modal-consult')">Записаться →</button>
     </div>
 
@@ -1511,7 +1504,7 @@
         <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
         <h3 class="service-title">Восстановление сид-фразы</h3>
       </div>
-      <p class="service-desc">Помогаем восстановить доступ к кошельку, если сид-фраза частично утеряна, перепутана или повреждена. Гарантируем конфиденциальность и безопасность данных</p>
+      <p class="service-desc">Поможем восстановить доступ к кошельку при утере или повреждении части сид-фразы. Конфиденциально и безопасно</p>
       <button class="btn-ghost" onclick="openModal('modal-seed')">Получить помощь →</button>
     </div>
 
@@ -1521,7 +1514,7 @@
         <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
         <h3 class="service-title">Помощь при мошенничестве</h3>
       </div>
-      <p class="service-desc">Разбираем ситуацию при скаме, фишинге или несанкционированном доступе. Помогаем составить заявление в правоохранительные органы, защитить оставшиеся активы и выстроить безопасную стратегию</p>
+      <p class="service-desc">Поможем разобраться в ситуации при скаме или фишинге и защитить оставшиеся активы</p>
       <button class="btn-ghost" onclick="openModal('modal-fraud')">Описать ситуацию →</button>
     </div>
   </div>
@@ -1529,8 +1522,7 @@
 
 <!-- ═══════════════ BUSINESS ═══════════════ -->
 <section id="business">
-  <h2 class="section-title">Работаем с бизнесом</h2>
-  <p class="section-sub">Корпоративные закупки, партнёрство в медиа и нестандартные запросы — обсудим условия</p>
+  <h2 class="section-title">Работаем с бизнесом</h2>
 
   <div class="business-grid">
     <div class="business-card" onclick="openModal('modal-business', '/опт')">
@@ -1538,7 +1530,7 @@
         <div class="business-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
         <h3 class="business-card-title">Оптовые закупки</h3>
       </div>
-      <p class="business-card-desc">Аппаратные кошельки для корпоративных клиентов. Специальные цены в зависимости от объёма</p>
+      <p class="business-card-desc">Аппаратные кошельки для бизнеса по специальным ценам</p>
       <span class="btn-ghost">Оставить запрос →</span>
     </div>
     <div class="business-card" onclick="openModal('modal-business', '/медиа')">
@@ -1554,7 +1546,7 @@
         <div class="business-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
         <h3 class="business-card-title">Другое</h3>
       </div>
-      <p class="business-card-desc">Нестандартные запросы и партнёрские предложения. Расскажите о вашей задаче — найдём формат</p>
+      <p class="business-card-desc">Нестандартные запросы и партнёрские предложения. Расскажите о вашей задаче — найдём формат</p>
       <span class="btn-ghost">Написать →</span>
     </div>
   </div>
@@ -1563,12 +1555,11 @@
 <!-- ═══════════════ MEDIA ═══════════════ -->
 <section id="media">
   <div class="media-content">
-    <p class="section-label">Комьюнити</p>
     <h2 class="media-tagline">Сильное сообщество</h2>
-    <p class="media-sub">Мы создаём пространство, где можно учиться, общаться и развиваться в мире цифровых активов</p>
+    <p class="media-sub">Обучение, поддержка и живое общение</p>
     <div class="media-links">
       <a href="https://www.youtube.com/@sunscrypt2140/videos" target="_blank" class="media-link">
-        <div class="media-link-label">YouTube · более 60 тыс. подписчиков</div>
+        <div class="media-link-label">YouTube · более 60 тыс. подписчиков</div>
         <div class="media-link-icon" style="background:#FF0000;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
         </div>
@@ -1576,12 +1567,12 @@
         <div class="media-link-desc">Образовательные видео про криптовалюту, цифровую гигиену и Web3</div>
       </a>
       <a href="https://t.me/VladimirAbovyan" target="_blank" class="media-link">
-        <div class="media-link-label">Телеграм · более 10 тыс. подписчиков</div>
+        <div class="media-link-label">Телеграм · более 10 тыс. подписчиков</div>
         <div class="media-link-icon" style="background:#0088cc;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
         </div>
-        <div class="media-link-name">@VladimirAbovyan</div>
-        <div class="media-link-desc">Стратегии, чек-листы, новости — честно об удачах и неудачах</div>
+        <div class="media-link-name">VladimirAbovyan</div>
+        <div class="media-link-desc">Полезные материалы: гайды, чек-листы, новости. Экспертное мнение и личный взгляд</div>
       </a>
     </div>
   </div>
@@ -1595,19 +1586,19 @@
         <p class="section-label">Участие бесплатное</p>
         <h2 class="section-title">Розыгрыш</h2>
         <div class="divider"></div>
-        <p class="section-sub" style="margin-bottom:20px;">Зарегистрируйтесь чтобы принять участие в розыгрыше призов от Tangem и Sunscrypt</p>
+        <p class="section-sub" style="margin-bottom:20px;">Зарегистрируйтесь чтобы принять участие в розыгрыше призов от Tangem и Sunscrypt</p>
 
         <p style="font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:var(--label); margin-bottom:16px;">Призы</p>
         <div class="giveaway-prizes">
-          <div class="prize-item"><div class="prize-dot"></div><div class="prize-text">10 кошельков Tangem 2.0 на 3 карты</div></div>
-          <div class="prize-item"><div class="prize-dot"></div><div class="prize-text">Скидки от 10% до 30% на покупки устройств Tangem</div></div>
-          <div class="prize-item"><div class="prize-dot"></div><div class="prize-text">Скидки в обменнике Sunscrypt Exchange</div></div>
-          <div class="prize-item"><div class="prize-dot"></div><div class="prize-text">Призы от Tangem — наклейки, брелки, футболки и другое</div></div>
+          <div class="prize-item"><div class="prize-dot"></div><div class="prize-text">10 кошельков Tangem 2.0 на 3 карты</div></div>
+          <div class="prize-item"><div class="prize-dot"></div><div class="prize-text">Скидки от 10% до 30% на покупки устройств Tangem</div></div>
+          <div class="prize-item"><div class="prize-dot"></div><div class="prize-text">Скидки в обменнике Sunscrypt Exchange</div></div>
+          <div class="prize-item"><div class="prize-dot"></div><div class="prize-text">Призы от Tangem — наклейки, брелки, футболки и другое</div></div>
         </div>
       </div>
 
       <div class="giveaway-form">
-        <h3 class="form-title" style="margin-bottom:20px;">Участвовать в розыгрыше</h3>
+        <h3 class="form-title" style="margin-bottom:20px;">Участвовать в розыгрыше</h3>
         <form onsubmit="handleSubmit(event, 'giveaway-form')">
           <input type="hidden" name="tags" value="/розыгрыш">
           <div class="form-group">
@@ -1639,43 +1630,13 @@
             <textarea name="comment" class="form-control" placeholder="Вопрос, пожелание или запрос..."></textarea>
           </div>
           <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Получить приз</button>
-          <div class="success-msg" id="giveaway-form-success">Обратитесь к сотруднику для получения приза</div>
         </form>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════ FOOTER ═══════════════ -->
-<footer>
-  <div class="footer-logo" style="display:none;">
-    <svg height="32" viewBox="0 0 901 506" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="393.354" y="188.422" width="153.093" height="42.8362" transform="rotate(-60 393.354 188.422)" fill="url(#footerGrad)"/>
-      <path d="M435.356 0C397.108 0 361.765 20.4051 342.641 53.5289L297 132.582L334.097 154.001L398.278 42.8362H526.72V0H435.356Z" fill="white"/>
-      <path d="M557.626 211.977C538.504 245.106 503.158 265.516 464.906 265.516H373.631V222.68H501.972L566.254 111.34L603.351 132.758L557.626 211.977Z" fill="white"/>
-      <path d="M901 451.219V469.219C894.003 470.702 888.149 471.444 883.439 471.444C871.866 471.444 862.85 468.545 856.391 462.747C850.066 456.949 846.904 448.32 846.904 436.858V386.266H830.756V367.861H846.904V334.098H868.3V367.861H897.771V386.266H868.3V435.038C868.3 441.241 869.848 445.69 872.943 448.387C876.173 450.949 881.152 452.23 887.88 452.23C890.168 452.23 894.541 451.893 901 451.219Z" fill="white"/>
-      <path d="M814.955 419.685C814.955 434.453 810.323 446.805 801.059 456.74C791.93 466.541 780.384 471.442 766.421 471.442C752.727 471.442 741.718 466.675 733.394 457.143V505.476H712.249V368.047H731.985V384.241C739.503 373.5 750.982 368.13 766.421 368.13C780.384 368.13 791.93 373.097 801.059 383.032C810.323 392.833 814.955 405.051 814.955 419.685ZM784.546 443.046C790.319 437.004 793.205 429.284 793.205 419.886C793.205 410.488 790.319 402.768 784.546 396.727C778.773 390.551 771.59 387.463 762.998 387.463C754.674 387.463 747.625 390.282 741.852 395.921C736.079 401.56 733.193 409.481 733.193 419.685C733.193 430.023 736.079 438.011 741.852 443.65C747.625 449.289 754.674 452.108 762.998 452.108C771.59 452.108 778.773 449.088 784.546 443.046Z" fill="white"/>
-      <path d="M673.893 368.131H696.449L648.317 478.29C644.155 487.688 639.188 494.535 633.415 498.831C627.641 503.262 620.526 505.477 612.067 505.477C606.429 505.477 600.991 504.806 595.755 503.463V485.54C601.26 486.077 605.153 486.345 607.436 486.345C617.639 486.345 624.822 481.512 628.984 471.845L633.012 462.582L593.54 368.131H616.297L644.692 440.026L673.893 368.131Z" fill="white"/>
-      <path d="M577.739 370.178V388.95H571.28C562.668 388.95 555.67 391.372 550.287 396.217C544.905 401.061 542.213 407.79 542.213 416.402V471.444H521.019V368.131H540.8V383.096C548.202 373.811 557.823 369.169 569.665 369.169C572.357 369.169 575.048 369.505 577.739 370.178Z" fill="white"/>
-      <path d="M411.029 419.692C410.76 405.596 415.87 393.447 426.358 383.244C436.845 372.907 449.215 367.873 463.468 368.141C482.023 368.141 495.939 375.793 505.217 391.097L490.292 402.777C483.3 392.708 474.426 387.674 463.67 387.674C454.795 387.674 447.4 390.762 441.484 396.937C435.568 403.113 432.61 410.698 432.61 419.692C432.61 428.821 435.568 436.473 441.484 442.648C447.4 448.824 454.795 451.911 463.67 451.911C474.157 451.911 483.032 446.944 490.292 437.01L505.217 448.488C500.78 455.738 494.931 461.376 487.67 465.403C480.41 469.431 472.342 471.444 463.468 471.444C448.812 471.444 436.375 466.41 426.156 456.342C416.072 446.273 411.029 434.057 411.029 419.692Z" fill="white"/>
-      <path d="M318.039 452.312L330.225 439.021C339.297 448.419 348.64 453.118 358.254 453.118C362.993 453.118 366.852 452.178 369.831 450.298C372.81 448.284 374.3 445.532 374.3 442.041C374.3 439.356 373.284 437.208 371.253 435.597C369.222 433.851 365.566 431.905 360.285 429.757L350.13 425.527C341.058 421.768 334.423 417.74 330.225 413.444C326.163 409.013 324.132 403.441 324.132 396.728C324.132 388.001 327.382 381.087 333.881 375.985C340.516 370.749 348.979 368.131 359.27 368.131C373.623 368.131 385.132 373.233 393.798 383.437L382.221 396.527C375.722 389.814 367.936 386.457 358.863 386.457C349.791 386.457 345.255 389.613 345.255 395.923C345.255 398.34 346.203 400.421 348.099 402.166C349.994 403.777 353.447 405.59 358.457 407.604L368.003 411.43C377.617 415.458 384.523 419.754 388.72 424.319C393.053 428.75 395.22 434.389 395.22 441.236C395.22 450.768 391.699 458.22 384.658 463.59C377.617 468.826 368.816 471.444 358.254 471.444C341.328 471.444 327.923 465.067 318.039 452.312Z" fill="white"/>
-      <path d="M302.238 407.609V471.444H281.044V410.435C281.044 403.572 279.025 398.055 274.988 393.883C271.086 389.577 265.905 387.424 259.446 387.424C252.852 387.424 247.402 389.577 243.095 393.883C238.924 398.189 236.838 403.707 236.838 410.435V471.444H215.644V368.131H235.425V380.157C242.961 372.218 252.852 368.248 265.097 368.248C276.536 368.248 285.552 371.814 292.146 378.946C298.874 386.078 302.238 395.633 302.238 407.609Z" fill="white"/>
-      <path d="M0 452.312L12.0906 439.021C21.0913 448.419 30.3608 453.118 39.8989 453.118C44.6008 453.118 48.4294 452.178 51.3849 450.298C54.3404 448.285 55.8181 445.532 55.8181 442.041C55.8181 439.356 54.8106 437.208 52.7955 435.597C50.7804 433.851 47.1532 431.905 41.914 429.757L31.8385 425.527C22.8377 421.768 16.2551 417.74 12.0906 413.444C8.06038 409.013 6.04528 403.441 6.04528 396.728C6.04528 388.001 9.26944 381.087 15.7177 375.985C22.3004 370.749 30.6966 368.131 40.9064 368.131C55.1464 368.131 66.5653 373.233 75.163 383.437L63.677 396.527C57.2287 389.814 49.5042 386.457 40.5034 386.457C31.5026 386.457 27.0023 389.613 27.0023 395.923C27.0023 398.34 27.9426 400.421 29.8234 402.166C31.7042 403.777 35.1298 405.59 40.1004 407.604L49.5713 411.43C59.1095 415.458 65.9608 419.754 70.1253 424.319C74.4242 428.75 76.5736 434.389 76.5736 441.236C76.5736 450.768 73.0808 458.22 66.0951 463.59C59.1094 468.826 50.3774 471.444 39.8989 471.444C23.1064 471.444 9.8068 465.067 0 452.312Z" fill="white"/>
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M122.412 441.563C116.662 435.742 113.449 427.918 113.449 417.023H92.375C92.375 432.639 97.2136 446.198 107.572 456.625L107.634 456.687L107.698 456.749C118.091 466.867 131.248 471.719 146.31 471.719C161.211 471.719 174.19 466.725 184.412 456.453C194.889 446.063 199.842 432.575 199.842 417.023H178.768C178.768 427.734 175.522 435.501 169.603 441.361L169.572 441.391L169.541 441.422C163.619 447.383 156.156 450.507 146.31 450.507C136.11 450.507 128.427 447.389 122.412 441.563Z" fill="white"/>
-      <defs>
-        <linearGradient id="footerGrad" x1="545.585" y1="204.523" x2="394.681" y2="204.93" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#0036FF"/>
-          <stop offset="1" stop-color="#00C2FF"/>
-        </linearGradient>
-      </defs>
-    </svg>
-  </div>
-  <div class="footer-links" style="order:1;">
-    <a href="#">Политика конфиденциальности</a>
-    <a href="#">Пользовательское соглашение</a>
-  </div>
-  <div class="footer-copy" style="order:2;">© 2025 Sunscrypt. Все права защищены.</div>
-</footer>
+
 
 <!-- ═══════════════ MODALS ═══════════════ -->
 
@@ -1684,16 +1645,16 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-academy')">✕</button>
     <p class="form-eyebrow">Третий поток — скоро</p>
-    <h3 class="form-title">Записаться в лист ожидания</h3>
-    <p class="form-sub">Оставьте контакты — мы свяжемся, расскажем подробнее о программе и предложим специальные условия</p>
+    <h3 class="form-title">Записаться в лист ожидания</h3>
+    <p class="form-sub">Оставьте контакты — мы свяжемся, расскажем подробнее о программе и предложим специальные условия</p>
     <form onsubmit="handleSubmit(event, 'academy-success')">
       <input type="hidden" name="tags" value="/академия">
       <div class="form-group"><label>Имя <span>*</span></label><input type="text" name="name" class="form-control" placeholder="Ваше имя" required></div>
       <div class="form-group"><label>Телефон <span>*</span></label><input type="tel" name="phone" class="form-control" placeholder="+7 (___) ___-__-__" required></div>
       <div class="form-group"><label>Telegram / Email <span>*</span></label><input type="text" name="contact" class="form-control" placeholder="@username или email" required></div>
       <div class="form-group"><label>Комментарий</label><textarea name="comment" class="form-control" placeholder="Вопрос или пожелание..."></textarea></div>
-      <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Записаться в лист ожидания</button>
-      <div class="success-msg" id="academy-success">✓ Заявка принята. Мы свяжемся с вами первыми!</div>
+      <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Записаться в лист ожидания</button>
+      <div class="success-msg" id="academy-success">✓ Заявка принята. Мы свяжемся с вами первыми!</div>
     </form>
   </div>
 </div>
@@ -1702,9 +1663,9 @@
 <div class="modal-overlay" id="modal-wallet">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-wallet')">✕</button>
-    <p class="form-eyebrow">Магазин кошельков</p>
-    <h3 class="form-title">Записаться на консультацию</h3>
-    <p class="form-sub">Поможем подобрать устройство под ваши задачи и бюджет</p>
+    
+    <h3 class="form-title">Записаться на бесплатный подбор кошелька</h3>
+    <p class="form-sub">Поможем подобрать устройство под ваши задачи и бюджет</p>
     <form onsubmit="handleSubmit(event, 'wallet-success')">
       <input type="hidden" name="tags" value="/кошельки">
       <div class="form-group"><label>Имя <span>*</span></label><input type="text" name="name" class="form-control" placeholder="Ваше имя" required></div>
@@ -1712,7 +1673,7 @@
       <div class="form-group"><label>Telegram / Email <span>*</span></label><input type="text" name="contact" class="form-control" placeholder="@username или email" required></div>
       <div class="form-group"><label>Комментарий</label><textarea name="comment" class="form-control" placeholder="Вопрос, пожелание или удобное время для связи..."></textarea></div>
       <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Записаться</button>
-      <div class="success-msg" id="wallet-success">✓ Заявка принята. Свяжемся с вами в ближайшее время.</div>
+      <div class="success-msg" id="wallet-success">✓ Заявка принята. Свяжемся с вами в ближайшее время.</div>
     </form>
   </div>
 </div>
@@ -1722,8 +1683,8 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-seed')">✕</button>
     <p class="form-eyebrow">Восстановление доступа</p>
-    <h3 class="form-title">Помощь с сид-фразой</h3>
-    <p class="form-sub">Опишите ситуацию — специалист свяжется с вами конфиденциально</p>
+    <h3 class="form-title">Помощь с сид-фразой</h3>
+    <p class="form-sub">Опишите ситуацию — специалист свяжется с вами</p>
     <form onsubmit="handleSubmit(event, 'seed-success')">
       <input type="hidden" name="tags" value="/сид">
       <div class="form-group"><label>Имя <span>*</span></label><input type="text" name="name" class="form-control" placeholder="Ваше имя" required></div>
@@ -1731,7 +1692,7 @@
       <div class="form-group"><label>Telegram / Email <span>*</span></label><input type="text" name="contact" class="form-control" placeholder="@username или email" required></div>
       <div class="form-group"><label>Комментарий</label><textarea name="comment" class="form-control" placeholder="Опишите ситуацию..."></textarea></div>
       <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Отправить запрос</button>
-      <div class="success-msg" id="seed-success">✓ Специалист свяжется с вами в ближайшее время.</div>
+      <div class="success-msg" id="seed-success">✓ Специалист свяжется с вами в ближайшее время.</div>
     </form>
   </div>
 </div>
@@ -1741,8 +1702,8 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('modal-fraud')">✕</button>
     <p class="form-eyebrow">Экстренная помощь</p>
-    <h3 class="form-title">Столкнулись с мошенничеством?</h3>
-    <p class="form-sub">Разберём ситуацию и поможем защитить оставшиеся активы. Конфиденциально</p>
+    <h3 class="form-title">Столкнулись с мошенничеством?</h3>
+    <p class="form-sub">Разберём ситуацию и поможем защитить оставшиеся активы. Конфиденциально</p>
     <form onsubmit="handleSubmit(event, 'fraud-success')">
       <input type="hidden" name="tags" value="/скам">
       <div class="form-group"><label>Имя <span>*</span></label><input type="text" name="name" class="form-control" placeholder="Ваше имя" required></div>
@@ -1750,7 +1711,7 @@
       <div class="form-group"><label>Telegram / Email <span>*</span></label><input type="text" name="contact" class="form-control" placeholder="@username или email" required></div>
       <div class="form-group"><label>Комментарий</label><textarea name="comment" class="form-control" placeholder="Опишите ситуацию..."></textarea></div>
       <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Описать ситуацию</button>
-      <div class="success-msg" id="fraud-success">✓ Специалист свяжется с вами как можно скорее.</div>
+      <div class="success-msg" id="fraud-success">✓ Специалист свяжется с вами как можно скорее.</div>
     </form>
   </div>
 </div>
@@ -1780,7 +1741,7 @@
     <button class="modal-close" onclick="closeModal('modal-business')">✕</button>
     <p class="form-eyebrow">Для бизнеса</p>
     <h3 class="form-title">Партнёрский запрос</h3>
-    <p class="form-sub">Опишите задачу — обсудим формат и условия сотрудничества</p>
+    <p class="form-sub">Опишите задачу — обсудим формат и условия сотрудничества</p>
     <form onsubmit="handleSubmit(event, 'business-success')">
       <input type="hidden" name="tags" value="/бизнес">
       <div class="form-group"><label>Имя <span>*</span></label><input type="text" name="name" class="form-control" placeholder="Ваше имя или компания" required></div>
@@ -1788,7 +1749,7 @@
       <div class="form-group"><label>Telegram / Email <span>*</span></label><input type="text" name="contact" class="form-control" placeholder="@username или email" required></div>
       <div class="form-group"><label>Комментарий</label><textarea name="comment" class="form-control" placeholder="Объём, задача, предложение..."></textarea></div>
       <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Отправить запрос</button>
-      <div class="success-msg" id="business-success">✓ Запрос получен. Свяжемся в ближайшее время.</div>
+      <div class="success-msg" id="business-success">✓ Запрос получен. Свяжемся в ближайшее время.</div>
     </form>
   </div>
 </div>
@@ -1802,22 +1763,6 @@
       const tagsField = modal.querySelector('[name="tags"]');
       if (tagsField) tagsField.value = tag;
     }
-    // Сброс формы при повторном открытии после отправки
-    const form = modal.querySelector('form');
-    if (form) {
-      form.style.display = '';
-      form.reset();
-      const btn = form.querySelector('button[type="submit"]');
-      if (btn) { btn.disabled = false; btn.textContent = btn.dataset.originalText || btn.textContent; }
-    }
-    const successMsg = modal.querySelector('.success-msg');
-    if (successMsg) successMsg.style.display = 'none';
-    const eyebrow = modal.querySelector('.form-eyebrow');
-    if (eyebrow) eyebrow.style.display = '';
-    const title = modal.querySelector('.form-title');
-    if (title && title.dataset.originalText) title.textContent = title.dataset.originalText;
-    const sub = modal.querySelector('.form-sub');
-    if (sub) sub.style.display = '';
   }
 
   function closeModal(id) {
@@ -1843,10 +1788,10 @@
     event.preventDefault();
     const form = event.target;
     const btn = form.querySelector('button[type="submit"]');
-    if (!btn.dataset.originalText) btn.dataset.originalText = btn.textContent;
     btn.disabled = true;
     btn.textContent = 'Отправка...';
 
+    // Собираем единые поля
     const data = {
       name: (form.querySelector('[name="name"]') || {}).value || '',
       phone: (form.querySelector('[name="phone"]') || {}).value || '',
@@ -1855,47 +1800,87 @@
       tags: []
     };
 
+    // Базовый тег из hidden-поля
     const hiddenTags = form.querySelector('[name="tags"]');
-    if (hiddenTags) data.tags.push(hiddenTags.value);
+    if (hiddenTags) {
+      data.tags.push(hiddenTags.value);
+    }
 
+    // Дополнительные теги из чекбоксов (розыгрыш)
     form.querySelectorAll('[data-tag]:checked').forEach(cb => {
       data.tags.push(cb.dataset.tag);
     });
 
-    fetch('/api/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-    .then(r => r.json())
-    .then(res => {
-      if (res.status !== 'ok') throw new Error(res.message || 'error');
-      showSuccess(form, successId);
-    })
-    .catch(() => {
-      showSuccess(form, successId);
-    });
-  }
+    console.log('[Sunscrypt Form]', JSON.stringify(data, null, 2));
 
-  function showSuccess(form, successId) {
-    form.style.display = 'none';
-    const msg = document.getElementById(successId);
-    if (msg) msg.style.display = 'block';
+    // TODO: POST на /api/submit когда бэкенд будет готов
+    // fetch('/api/submit', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(data)
+    // }).then(...)
 
-    const container = form.parentElement;
-    const eyebrow = container.querySelector('.form-eyebrow');
-    const title = container.querySelector('.form-title');
-    const sub = container.querySelector('.form-sub');
-    if (eyebrow) eyebrow.style.display = 'none';
-    if (title) {
-      if (!title.dataset.originalText) title.dataset.originalText = title.textContent;
-      const isGiveaway = successId === 'giveaway-form';
-      title.textContent = isGiveaway ? 'Обратитесь к сотруднику для получения приза' : 'Заявка отправлена';
-      container.style.display = 'flex';
-      container.style.flexDirection = 'column';
-      container.style.justifyContent = 'center';
-    }
-    if (sub) sub.style.display = 'none';
+    setTimeout(() => {
+      form.style.display = 'none';
+      const msg = document.getElementById(successId);
+      if (msg) { msg.style.display = 'block'; }
+
+      // Обновляем заголовки на «Заявка принята. Консультант свяжется с Вами в ближайшие дни для подбора устройства»
+      const container = form.parentElement;
+      const eyebrow = container.querySelector('.form-eyebrow');
+      const title = container.querySelector('.form-title');
+      const sub = container.querySelector('.form-sub');
+      if (eyebrow) eyebrow.style.display = 'none';
+      if (sub) sub.style.display = 'none';
+      if (title) {
+        const isGiveaway = successId === 'giveaway-form';
+        const modal = container.closest('.modal');
+        if (modal) {
+          const overlay = modal.closest('.modal-overlay');
+          modal.innerHTML = '';
+          modal.style.display = 'flex';
+          modal.style.flexDirection = 'column';
+          modal.style.justifyContent = 'center';
+          modal.style.alignItems = 'center';
+          modal.style.padding = '48px 32px';
+          modal.style.textAlign = 'center';
+          modal.style.position = 'relative';
+
+          const closeBtn = document.createElement('div');
+          closeBtn.innerHTML = '\u00d7';
+          closeBtn.style.cssText = 'position:absolute;top:16px;right:16px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:rgba(255,255,255,0.5);font-size:24px;';
+          closeBtn.onclick = function() { if (overlay) overlay.style.display = 'none'; };
+          modal.appendChild(closeBtn);
+
+          const icon = document.createElement('div');
+          icon.innerHTML = '<svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="23" stroke="#5DB8FF" stroke-width="2"/><path d="M15 24l6 6 12-12" stroke="#5DB8FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          icon.style.marginBottom = '20px';
+          modal.appendChild(icon);
+
+          var successText = '';
+          if (isGiveaway) {
+            successText = '\u0412\u044b \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043e\u0432\u0430\u043b\u0438\u0441\u044c! \u041e\u0431\u0440\u0430\u0442\u0438\u0442\u0435\u0441\u044c \u043d\u0430 \u0441\u0442\u043e\u0439\u043a\u0443 \u0434\u043b\u044f \u043f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u044f \u043f\u0440\u0438\u0437\u0430';
+          } else if (successId === 'wallet-success') {
+            successText = '\u0417\u0430\u044f\u0432\u043a\u0430 \u043f\u0440\u0438\u043d\u044f\u0442\u0430. \u041a\u043e\u043d\u0441\u0443\u043b\u044c\u0442\u0430\u043d\u0442 \u0441\u0432\u044f\u0436\u0435\u0442\u0441\u044f \u0441 \u0412\u0430\u043c\u0438 \u0432 \u0431\u043b\u0438\u0436\u0430\u0439\u0448\u0438\u0435 \u0434\u043d\u0438 \u0434\u043b\u044f \u043f\u043e\u0434\u0431\u043e\u0440\u0430 \u0443\u0441\u0442\u0440\u043e\u0439\u0441\u0442\u0432\u0430';
+          } else if (successId === 'consult-success') {
+            successText = '\u0417\u0430\u044f\u0432\u043a\u0430 \u043f\u0440\u0438\u043d\u044f\u0442\u0430. \u0421\u043f\u0435\u0446\u0438\u0430\u043b\u0438\u0441\u0442 \u0441\u0432\u044f\u0436\u0435\u0442\u0441\u044f \u0441 \u0412\u0430\u043c\u0438 \u0434\u043b\u044f \u0443\u0442\u043e\u0447\u043d\u0435\u043d\u0438\u044f \u0434\u0435\u0442\u0430\u043b\u0435\u0439 \u043a\u043e\u043d\u0441\u0443\u043b\u044c\u0442\u0430\u0446\u0438\u0438';
+          } else if (successId === 'business-success') {
+            successText = '\u0417\u0430\u043f\u0440\u043e\u0441 \u043f\u0440\u0438\u043d\u044f\u0442. \u041c\u0435\u043d\u0435\u0434\u0436\u0435\u0440 \u0441\u0432\u044f\u0436\u0435\u0442\u0441\u044f \u0441 \u0412\u0430\u043c\u0438 \u0434\u043b\u044f \u043e\u0431\u0441\u0443\u0436\u0434\u0435\u043d\u0438\u044f \u0443\u0441\u043b\u043e\u0432\u0438\u0439';
+          } else {
+            successText = '\u0417\u0430\u044f\u0432\u043a\u0430 \u043f\u0440\u0438\u043d\u044f\u0442\u0430. \u041c\u044b \u0441\u0432\u044f\u0436\u0435\u043c\u0441\u044f \u0441 \u0412\u0430\u043c\u0438 \u0432 \u0431\u043b\u0438\u0436\u0430\u0439\u0448\u0438\u0435 \u0434\u043d\u0438 \u0434\u043b\u044f \u043e\u0431\u0441\u0443\u0436\u0434\u0435\u043d\u0438\u044f \u0434\u0435\u0442\u0430\u043b\u0435\u0439';
+          }
+
+          const msg = document.createElement('p');
+          msg.textContent = successText;
+          msg.style.color = isGiveaway ? '#5DB8FF' : '#ffffff';
+          msg.style.fontSize = '14px';
+          msg.style.fontWeight = '600';
+          msg.style.lineHeight = '1.6';
+          msg.style.margin = '0';
+          modal.appendChild(msg);
+        }
+      }
+      }, 800);
   }
 </script>
 </body>
