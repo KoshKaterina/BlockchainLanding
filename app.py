@@ -1,5 +1,6 @@
 import os
 import json
+import base64
 from datetime import datetime
 
 from dotenv import load_dotenv
@@ -17,10 +18,13 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 
 def get_sheet():
-    creds_json = os.environ.get('GOOGLE_CREDENTIALS')
-    if not creds_json:
+    creds_raw = os.environ.get('GOOGLE_CREDENTIALS')
+    if not creds_raw:
         raise RuntimeError('GOOGLE_CREDENTIALS env var not set')
-    creds_info = json.loads(creds_json)
+    try:
+        creds_info = json.loads(creds_raw)
+    except json.JSONDecodeError:
+        creds_info = json.loads(base64.b64decode(creds_raw))
     creds = Credentials.from_service_account_info(creds_info, scopes=SCOPES)
     gc = gspread.authorize(creds)
     return gc.open_by_key(SPREADSHEET_ID).sheet1
