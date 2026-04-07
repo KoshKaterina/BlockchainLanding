@@ -1813,12 +1813,11 @@
 
     console.log('[Sunscrypt Form]', JSON.stringify(data, null, 2));
 
-    // TODO: POST на /api/submit когда бэкенд будет готов
-    // fetch('/api/submit', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(data)
-    // }).then(...)
+    fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).catch(err => console.error('Submit error:', err));
 
     setTimeout(() => {
       form.style.display = 'none';
