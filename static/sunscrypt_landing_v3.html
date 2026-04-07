@@ -521,7 +521,7 @@
     background: linear-gradient(90deg, #00C2FF 0%, #0036FF 100%);
     border-radius: 50%;
     flex-shrink: 0;
-    margin-top: 8px;
+    margin-top: 10px;
   }
 
   .brands-row {
@@ -1834,6 +1834,32 @@
       if (title) {
         const isGiveaway = successId === 'giveaway-form';
         const modal = container.closest('.modal');
+        
+        // Для розыгрыша (не в модалке) — показываем success в контейнере формы
+        if (!modal && isGiveaway) {
+          container.innerHTML = '';
+          container.style.display = 'flex';
+          container.style.flexDirection = 'column';
+          container.style.justifyContent = 'center';
+          container.style.alignItems = 'center';
+          container.style.padding = '24px 48px';
+          container.style.textAlign = 'center';
+
+          const icon = document.createElement('div');
+          icon.innerHTML = '<svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="23" stroke="#5DB8FF" stroke-width="2"/><path d="M15 24l6 6 12-12" stroke="#5DB8FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+          icon.style.marginBottom = '20px';
+          container.appendChild(icon);
+
+          const msg = document.createElement('p');
+          msg.textContent = '\u0412\u044b \u0443\u0441\u043f\u0435\u0448\u043d\u043e \u0437\u0430\u0440\u0435\u0433\u0438\u0441\u0442\u0440\u0438\u0440\u043e\u0432\u0430\u043b\u0438\u0441\u044c! \u041e\u0431\u0440\u0430\u0442\u0438\u0442\u0435\u0441\u044c \u043d\u0430 \u0441\u0442\u043e\u0439\u043a\u0443 \u0434\u043b\u044f \u043f\u043e\u043b\u0443\u0447\u0435\u043d\u0438\u044f \u043f\u0440\u0438\u0437\u0430';
+          msg.style.color = '#5DB8FF';
+          msg.style.fontSize = '14px';
+          msg.style.fontWeight = '600';
+          msg.style.lineHeight = '1.6';
+          msg.style.margin = '0';
+          container.appendChild(msg);
+        }
+        
         if (modal) {
           const overlay = modal.closest('.modal-overlay');
           modal.innerHTML = '';
