@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D0D0D">
+<title>Sunscrypt — надёжный партнёр в мире цифровых активов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #5DB8FF;
+    --blue-light: #7CC8FF;
+    --blue-grad: linear-gradient(160deg, #7CC8FF 0%, #5DB8FF 100%);
+    --blue-glow: rgba(93,184,255,0.25);
+    --label: #5DB8FF;
+    --black: #0D0D0D;
+    --dark: #111111;
+    --dark2: #161616;
+    --dark3: #1E1E1E;
+    --dark4: #242424;
+    --white: #FFFFFF;
+    --white-dim: rgba(255,255,255,0.55);
+    --white-faint: rgba(255,255,255,0.08);
+    --accent: #5DB8FF;
+    --radius: 6px;
+    --font-display: 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  /* noise overlay removed for scroll performance */
+
+  /* ─── STICKY HEADER ─── */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10,10,10,0.97);
+    border-bottom: 1px solid rgba(93,184,255,0.15);
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .header-logo {
+    text-decoration: none;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .header-contacts {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--white-dim);
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .header-contacts span { opacity: 0.3; }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--white);
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid rgba(93,184,255,0.2);
+    border-radius: 2px;
+    transition: color 0.2s, border-color 0.2s;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  .contact-link:hover {
+    border-color: var(--label);
+    color: var(--label);
+    background: rgba(93,184,255,0.05);
+  }
+
+  .contact-link svg { flex-shrink: 0; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 40px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+  }
+
+  /* Bottom-right dark blue blob */
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    right: -8%;
+    bottom: -40%;
+    width: 55%;
+    aspect-ratio: 1;
+    background: linear-gradient(90deg, #00C2FF 0%, #0036FF 100%);
+    border-radius: 50%;
+    filter: blur(160px);
+    opacity: 0.35;
+    will-change: transform;
+  }
+
+  /* Top-right cyan blob */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    right: 2%;
+    top: -15%;
+    width: 24%;
+    aspect-ratio: 1;
+    background: #7CC8FF;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.28;
+    will-change: transform;
+  }
+
+  /* Top-left cyan blob */
+  .hero::before {
+    content: '';
+    position: absolute;
+    left: -12%;
+    top: -25%;
+    width: 52%;
+    aspect-ratio: 1;
+    background: #7CC8FF;
+    border-radius: 50%;
+    filter: blur(160px);
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
+  }
+
+  /* Small top-left cyan blob */
+  .hero::after {
+    content: '';
+    position: absolute;
+    left: 2%;
+    top: -5%;
+    width: 20%;
+    aspect-ratio: 1;
+    background: #7CC8FF;
+    border-radius: 50%;
+    filter: blur(110px);
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 0;
+    will-change: transform;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  .hero-content { position: relative; max-width: 900px; text-align: center; margin: 0 auto; }
+
+  .hero-eyebrow {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 68px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--label);
+  }
+
+  .hero-sub {
+    font-size: clamp(15px, 1.8vw, 18px);
+    color: var(--white-dim);
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 44px;
+    font-weight: 300;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  /* ─── BUTTONS ─── */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(90deg, #00C2FF 0%, #0036FF 100%);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    padding: 15px 28px;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.25s, transform 0.25s;
+    box-shadow: none;
+  }
+
+  .btn-primary:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+    box-shadow: none;
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-transform: none;
+    padding: 15px 28px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: var(--radius);
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--label);
+    color: var(--label);
+    background: rgba(93,184,255,0.06);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--label);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 8px 0;
+    border: none;
+    border-bottom: 1px solid rgba(0,180,255,0.35);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--label); opacity: 0.75; }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 100px 40px; }
+
+  .section-label {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    opacity: 0.85;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 3.5vw, 46px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    color: var(--white-dim);
+    font-size: 16px;
+    max-width: 520px;
+    line-height: 1.7;
+  }
+
+  .divider {
+    width: 36px;
+    height: 2px;
+    background: linear-gradient(90deg, #7CC8FF, #5DB8FF);
+    margin: 28px 0;
+    border-radius: 2px;
+  }
+
+  /* ─── PRODUCTS SECTION ─── */
+  #products { background: var(--dark); padding-top: 24px; padding-bottom: 24px; }
+
+  .products-header {
+    margin-bottom: 48px;
+  }
+  .products-header-badge {
+    margin-bottom: 32px;
+    margin-left: -40px;
+    margin-right: -40px;
+  }
+  .products-header-badge span {
+    display: block;
+    background: linear-gradient(to bottom, #1a1a1a 0%, #3a3a3a 50%, #1a1a1a 100%);
+    color: #ffffff;
+    font-family: var(--font-display);
+    font-size: clamp(20px, 3vw, 32px);
+    font-weight: 700;
+    padding: 18px 40px;
+    letter-spacing: -0.01em;
+    text-align: center;
+  }
+  .products-header .products-subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  /* ─── PRODUCT CARD ─── */
+  .product-card {
+    background: var(--dark2);
+    border: 1px solid rgba(93,184,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 2px;
+    transition: border-color 0.3s;
+  }
+
+  .product-card:hover { border-color: rgba(93,184,255,0.3); }
+
+  .product-card-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 480px;
+  }
+
+  .product-card-inner.reverse { direction: rtl; }
+  .product-card-inner.reverse > * { direction: ltr; }
+
+  .product-visual {
+    background: var(--dark3);
+    position: relative;
+    overflow: hidden;
+    min-height: 300px;
+  }
+
+  .product-visual-placeholder {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--white-dim);
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .product-visual-placeholder svg { opacity: 0.2; }
+
+  .showroom-img-placeholder {
+    background: linear-gradient(135deg, #1a1a1a 0%, #222 50%, #1a1a1a 100%);
+    position: absolute;
+    inset: 0;
+  }
+
+  .showroom-img-placeholder::after {
+    content: 'ФОТО ШОУРУМА';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: rgba(93,184,255,0.3);
+  }
+
+  .product-content {
+    padding: 56px 52px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .product-number {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: var(--label);
+    opacity: 0.6;
+    margin-bottom: 20px;
+  }
+
+  .product-title {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 2.5vw, 30px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+  }
+
+  .product-subtitle {
+    font-size: 13px;
+    color: var(--label);
+    margin-bottom: 28px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    opacity: 0.85;
+  }
+
+  .features-list {
+    list-style: none;
+    margin-bottom: 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .features-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--white-dim);
+    line-height: 1.5;
+  }
+
+  .features-list__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+  }
+  .features-list__item::before {
+    content: '⦁';
+    color: var(--label);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .features-list li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: linear-gradient(90deg, #00C2FF 0%, #0036FF 100%);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  .brands-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+
+  .brand-tag {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    background: rgba(0,199,254,0.1);
+    border: 1px solid rgba(0,199,254,0.35);
+    padding: 5px 13px;
+    border-radius: 20px;
+    text-transform: uppercase;
+  }
+
+  .brand-tag--blue {
+    background: linear-gradient(90deg, #00C2FF 0%, #0066FF 100%);
+    border: none;
+  }
+
+  .product-ctas {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  /* ─── EXCHANGE CARD ─── */
+  .exchange-bg {
+    background: linear-gradient(135deg, #141414 0%, #1c1c1c 100%);
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .exchange-icon {
+    opacity: 0.08;
+  }
+
+  .exchange-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(93,184,255,0.08);
+    margin-bottom: 36px;
+  }
+
+  .exchange-feature {
+    background: var(--dark2);
+    padding: 20px 24px;
+  }
+
+  .exchange-feature-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--label);
+    margin-bottom: 4px;
+  }
+
+  .exchange-feature-value {
+    font-size: 14px;
+    color: var(--white-dim);
+  }
+
+  /* ─── ACADEMY ─── */
+  #academy { background: var(--dark); padding-top: 0; }
+
+  .academy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 60px;
+  }
+
+  .academy-modules {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .module-item {
+    background: var(--dark2);
+    border: 1px solid rgba(93,184,255,0.08);
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: border-color 0.2s;
+  }
+
+  .module-item:hover { border-color: rgba(93,184,255,0.25); }
+
+  .module-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    color: var(--label);
+    opacity: 0.5;
+    flex-shrink: 0;
+    width: 24px;
+  }
+
+  .module-name {
+    font-size: 14px;
+    color: var(--white-dim);
+  }
+
+  .academy-form-wrap {
+    background: var(--dark2);
+    border: 1px solid rgba(93,184,255,0.15);
+    padding: 40px;
+  }
+
+  .form-eyebrow {
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--label);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .form-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .form-sub {
+    font-size: 13px;
+    color: var(--white-dim);
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+
+  /* ─── FORM INPUTS ─── */
+  .form-group { margin-bottom: 16px; }
+
+  .form-group label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    margin-bottom: 8px;
+  }
+
+  .form-group label span { color: var(--label); }
+
+  .form-control {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(245,243,238,0.12);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    color: var(--white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-control:focus { border-color: var(--blue); }
+  .form-control::placeholder { color: rgba(245,243,238,0.25); }
+
+  select.form-control { cursor: pointer; }
+  textarea.form-control { resize: vertical; min-height: 90px; }
+
+  /* ─── SERVICES ─── */
+  #services { background: var(--dark); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(93,184,255,0.08);
+    margin-top: 40px;
+  }
+
+  .service-card {
+    background: var(--dark2);
+    padding: 44px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: background 0.2s;
+  }
+
+  .service-card:hover { background: #1f1f1f; }
+
+  .service-icon {
+    color: var(--label);
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .service-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .service-title {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    color: var(--white-dim);
+    line-height: 1.65;
+    flex-grow: 1;
+  }
+
+  /* ─── MODAL ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    padding: 20px;
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal {
+    background: var(--dark2);
+    border: 1px solid rgba(93,184,255,0.2);
+    padding: 48px;
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--white-dim);
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+    transition: color 0.2s;
+  }
+
+  .modal-close:hover { color: var(--white); }
+
+  /* ─── BUSINESS ─── */
+  #business { background: var(--black); }
+
+  .business-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(93,184,255,0.08);
+    margin: 40px 0;
+  }
+
+  .business-card {
+    background: var(--dark2);
+    padding: 44px 36px;
+    cursor: pointer;
+    transition: background 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+
+  .business-card:hover {
+    background: #1a1a1a;
+    border-bottom-color: var(--blue);
+  }
+
+  .business-card-icon {
+    color: var(--label);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .business-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .business-card-title {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .business-card-desc {
+    font-size: 14px;
+    color: var(--white-dim);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  /* ─── MEDIA ─── */
+  #media {
+    background: var(--dark);
+    text-align: center;
+    padding: 100px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #media::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    aspect-ratio: 1;
+    background: linear-gradient(90deg, #00C2FF 0%, #0036FF 100%);
+    border-radius: 50%;
+    filter: blur(180px);
+    opacity: 0.13;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  .media-content { max-width: 640px; margin: 0 auto; position: relative; z-index: 1; }
+
+  .media-tagline {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 3vw, 36px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+
+  .media-sub {
+    color: var(--white-dim);
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .media-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .media-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--dark2);
+    border: 1px solid rgba(93,184,255,0.15);
+    padding: 20px 32px;
+    text-decoration: none;
+    color: var(--white);
+    transition: border-color 0.2s, color 0.2s;
+    min-width: 220px;
+  }
+
+  .media-link:hover {
+    border-color: var(--blue);
+    color: var(--label);
+  }
+
+  .media-link-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .media-link-info { text-align: left; }
+  .media-link-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--label); opacity: 0.7; }
+  .media-link-name { font-family: var(--font-display); font-size: 16px; font-weight: 600; }
+  .media-link-desc { font-size: 13px; color: var(--white-dim); line-height: 1.5; }
+
+  /* ─── GIVEAWAY ─── */
+  #giveaway {
+    background: var(--black);
+    border-top: 1px solid rgba(93,184,255,0.15);
+    padding: 100px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #giveaway::before {
+    content: '';
+    position: absolute;
+    right: -10%;
+    bottom: -50%;
+    width: 50%;
+    aspect-ratio: 1;
+    background: linear-gradient(90deg, #00C2FF 0%, #0036FF 100%);
+    border-radius: 50%;
+    filter: blur(160px);
+    opacity: 0.2;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  #giveaway::after {
+    content: '';
+    position: absolute;
+    left: -5%;
+    top: -20%;
+    width: 30%;
+    aspect-ratio: 1;
+    background: #7CC8FF;
+    border-radius: 50%;
+    filter: blur(130px);
+    opacity: 0.12;
+    pointer-events: none;
+    will-change: transform;
+  }
+
+  .giveaway-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .giveaway-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+    align-items: start;
+  }
+
+  .giveaway-prizes {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .prize-item {
+    background: var(--dark2);
+    border: 1px solid rgba(93,184,255,0.1);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .prize-dot {
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(90deg, #00C2FF 0%, #0036FF 100%);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .prize-text { font-size: 14px; color: var(--white-dim); }
+
+  .giveaway-form {
+    background: var(--dark2);
+    border: 1px solid rgba(93,184,255,0.15);
+    padding: 48px;
+  }
+
+  .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .form-group .checkbox-label {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 0;
+    color: var(--white-dim);
+    text-transform: none;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    accent-color: var(--blue);
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    top: 2px;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(93,184,255,0.1);
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-logo {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    color: var(--white-dim);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--white); }
+
+  .footer-copy {
+    font-size: 12px;
+    color: rgba(245,243,238,0.3);
+  }
+
+  /* ─── BRAND DECORATIVE ELEMENTS ─── */
+  .hero-brand-pattern {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .hero-brand-pattern svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .hero-parallelograms {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    pointer-events: none;
+    overflow: hidden;
+    opacity: 0.7;
+  }
+
+  .brand-divider {
+    height: 48px;
+    overflow: hidden;
+    opacity: 0.5;
+    background: var(--black);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SUCCESS MESSAGE ─── */
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 24px;
+    color: var(--label);
+    font-family: var(--font-display);
+    font-size: 14px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ═══════════════════════════════════════
+     ТОЛЬКО МОБИЛЬНАЯ ВЕРСИЯ
+  ═══════════════════════════════════════ */
+
+  /* HEADER — только иконки контактов */
+  header {
+    padding: 10px 20px;
+    justify-content: space-between;
+  }
+  .header-logo { display: flex; }
+  .header-contacts { gap: 4px; flex-wrap: nowrap; }
+  .header-contacts span { display: none; }
+  .contact-link { padding: 7px 10px; }
+  .contact-link .contact-text { display: none; }
+  .contact-link svg { width: 13px; height: 13px; }
+
+  /* HERO */
+  .hero {
+    min-height: auto;
+    padding: 28px 20px 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .hero-grid { display: none; }
+  .hero-logo-block {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 0 40px;
+  }
+  .hero-logo-block svg { height: 80px; width: auto; }
+
+  .hero-content { position: relative; z-index: 1; }
+
+  .hero h1 {
+    font-size: clamp(28px, 8vw, 40px);
+    letter-spacing: -0.025em;
+    margin-bottom: 20px;
+  }
+  .hero-eyebrow { font-size: 10px; letter-spacing: 0.2em; margin-bottom: 16px; }
+  .hero-sub { font-size: 16px; margin-bottom: 28px; }
+
+  .hero-ctas { flex-direction: column; gap: 10px; }
+  .hero-ctas .btn-primary,
+  .hero-ctas .btn-outline {
+    width: 100%;
+    justify-content: center;
+    padding: 15px 20px;
+    font-size: 15px;
+  }
+
+  /* SECTIONS */
+  section { padding: 48px 20px; }
+  .section-label { font-size: 12px; }
+  .section-title { font-size: clamp(24px, 7vw, 30px); }
+  .section-sub { font-size: 15px; }
+  .divider { margin: 16px 0 24px; }
+
+  /* PRODUCTS */
+  .products-header { margin-bottom: 28px; }
+  .product-card-inner,
+  .product-card-inner.reverse { grid-template-columns: 1fr; direction: ltr; min-height: auto; }
+  .product-visual { min-height: 200px; }
+  .product-content { padding: 28px 20px; }
+  .product-title { font-size: 22px; }
+  .product-subtitle { font-size: 14px; }
+  .product-number { margin-bottom: 16px; }
+  .brands-row { gap: 6px; margin-bottom: 20px; }
+  .brand-tag { font-size: 11px; padding: 4px 10px; }
+  .features-list { gap: 10px; margin-bottom: 24px; }
+  .features-list li { font-size: 15px; }
+  .product-ctas { flex-direction: column; gap: 10px; }
+  .product-ctas .btn-primary,
+  .product-ctas .btn-outline { width: 100%; justify-content: center; font-size: 15px; }
+  .exchange-features { grid-template-columns: 1fr 1fr; gap: 1px; }
+  .exchange-feature { padding: 14px 14px; }
+  .exchange-feature-value { font-size: 14px; }
+
+  /* ACADEMY */
+  .academy-grid { grid-template-columns: 1fr; gap: 28px; margin-top: 28px; }
+  .academy-form-wrap { padding: 28px 20px; }
+  .module-item { padding: 12px 16px; }
+
+  /* SERVICES */
+  .services-grid { grid-template-columns: 1fr; }
+  .service-card { padding: 28px 20px; }
+  .service-title { font-size: 17px; }
+  .service-desc { font-size: 15px; }
+
+  /* BUSINESS */
+  .business-grid { grid-template-columns: 1fr; }
+  .business-card { padding: 28px 20px; }
+  .business-card-title { font-size: 17px; }
+  .business-card-desc { font-size: 15px; }
+
+  /* MEDIA */
+  #media { padding: 48px 20px; }
+  .media-links { flex-direction: column; gap: 10px; }
+  .media-link { min-width: unset; width: 100%; flex-direction: column; text-align: center; padding: 24px 20px; gap: 12px; }
+  .media-link-info { text-align: center; }
+  .media-link-info { text-align: center; }
+  .media-link-name { font-size: 16px; }
+  .media-link-label { font-size: 11px; text-transform: none; letter-spacing: 0.03em; }
+  .media-link-desc { font-size: 13px; }
+
+  /* GIVEAWAY */
+  #giveaway { padding: 48px 20px; }
+  .giveaway-header { grid-template-columns: 1fr; gap: 32px; margin-bottom: 0; }
+  .giveaway-form { padding: 28px 20px; }
+  .prize-item { padding: 12px 16px; }
+  .prize-text { font-size: 15px; }
+
+  /* BUTTONS */
+  .btn-ghost { font-size: 14px; }
+
+  /* FORMS */
+  .form-control { font-size: 15px; }
+  .form-title { font-size: 20px; }
+  .form-sub { font-size: 14px; }
+  .form-eyebrow { font-size: 11px; }
+
+  /* MODAL — bottom sheet */
+  .modal-overlay { align-items: flex-end; padding: 0; }
+  .modal {
+    padding: 28px 20px;
+    max-height: 92svh;
+    border-radius: 16px 16px 0 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* FOOTER */
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 24px 20px;
+  }
+  .footer-links { gap: 16px; }
+  .footer-links a { font-size: 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header>
+  <a href="#" class="header-logo">
+    <svg height="36" width="36" viewBox="0 0 1080 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="396.083" y="691.023" width="401.638" height="112.381" transform="rotate(-60 396.083 691.023)" fill="url(#hlogo_a)"/>
+      <rect x="396.083" y="691.023" width="401.638" height="112.381" transform="rotate(-60 396.083 691.023)" fill="url(#hlogo_b)"/>
+      <path d="M506.278 196.699C405.934 196.699 313.212 250.232 263.04 337.132L143.3 544.529L240.626 600.72L409.004 309.08H745.97V196.699H506.278Z" fill="white"/>
+      <path d="M827.049 752.82C776.881 839.735 684.151 893.28 583.796 893.28H344.337V780.899H681.039L849.683 488.799L947.008 544.99L827.049 752.82Z" fill="white"/>
+      <defs>
+        <linearGradient id="hlogo_a" x1="795.458" y1="733.265" x2="399.562" y2="734.333" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#0036FF"/><stop offset="1" stop-color="#00C2FF"/>
+        </linearGradient>
+        <linearGradient id="hlogo_b" x1="795.458" y1="733.265" x2="399.562" y2="734.333" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#0036FF"/><stop offset="1" stop-color="#00C2FF"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <svg height="20" viewBox="0 0 1318 251" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-left:10px;">
+<path d="M1318 171.327V197.658C1307.76 199.828 1299.2 200.913 1292.31 200.913C1275.38 200.913 1262.19 196.672 1252.75 188.191C1243.49 179.709 1238.87 167.086 1238.87 150.32V76.3133H1215.25V49.3898H1238.87V0H1270.17V49.3898H1313.28V76.3133H1270.17V147.658C1270.17 156.731 1272.43 163.24 1276.96 167.184C1281.68 170.932 1288.97 172.806 1298.81 172.806C1302.15 172.806 1308.55 172.313 1318 171.327Z" fill="white"/><path d="M1192.13 125.199C1192.13 146.803 1185.36 164.871 1171.81 179.404C1158.45 193.741 1141.56 200.91 1121.14 200.91C1101.11 200.91 1085 193.938 1072.83 179.994V250.696H1041.89V49.6621H1070.76V73.3508C1081.76 57.6392 1098.55 49.7833 1121.14 49.7833C1141.56 49.7833 1158.45 57.05 1171.81 71.5832C1185.36 85.9201 1192.13 103.792 1192.13 125.199ZM1147.65 159.372C1156.1 150.534 1160.32 139.242 1160.32 125.494C1160.32 111.746 1156.1 100.453 1147.65 91.6156C1139.21 82.5814 1128.7 78.0643 1116.13 78.0643C1103.95 78.0643 1093.64 82.1886 1085.2 90.4372C1076.75 98.6858 1072.53 110.273 1072.53 125.199C1072.53 140.322 1076.75 152.007 1085.2 160.256C1093.64 168.505 1103.95 172.629 1116.13 172.629C1128.7 172.629 1139.21 168.21 1147.65 159.372Z" fill="white"/><path d="M985.784 49.7832H1018.78L948.371 210.926C942.282 224.674 935.016 234.69 926.571 240.974C918.126 247.455 907.717 250.696 895.344 250.696C887.095 250.696 879.141 249.714 871.482 247.75V221.531C879.534 222.317 885.229 222.71 888.568 222.71C903.494 222.71 914.001 215.639 920.09 201.499L925.982 187.948L868.241 49.7832H901.53L943.068 154.953L985.784 49.7832Z" fill="white"/><path d="M845.128 52.7776V80.238H835.68C823.081 80.238 812.845 83.7813 804.971 90.8678C797.097 97.9544 793.16 107.797 793.16 120.395V200.912H762.156V49.7832H791.093V71.6751C801.92 58.0925 815.995 51.3012 833.317 51.3012C837.254 51.3012 841.191 51.7933 845.128 52.7776Z" fill="white"/><path d="M601.262 125.208C600.868 104.588 608.343 86.8157 623.684 71.8908C639.026 56.7696 657.121 49.4054 677.97 49.7981C705.113 49.7981 725.47 60.9918 739.041 83.379L717.209 100.464C706.981 85.7356 694 78.3714 678.265 78.3714C665.284 78.3714 654.466 82.8881 645.812 91.9216C637.157 100.955 632.83 112.05 632.83 125.208C632.83 138.562 637.157 149.755 645.812 158.789C654.466 167.822 665.284 172.339 678.265 172.339C693.607 172.339 706.588 165.073 717.209 150.541L739.041 167.331C732.551 177.936 723.995 186.184 713.374 192.075C702.752 197.967 690.951 200.912 677.97 200.912C656.531 200.912 638.337 193.548 623.389 178.82C608.638 164.091 601.262 146.221 601.262 125.208Z" fill="white"/><path d="M465.234 172.925L483.061 153.482C496.332 167.23 509.999 174.104 524.062 174.104C530.995 174.104 536.64 172.729 540.998 169.979C545.355 167.033 547.534 163.007 547.534 157.901C547.534 153.973 546.049 150.831 543.078 148.474C540.106 145.921 534.758 143.073 527.034 139.93L512.178 133.744C498.907 128.245 489.201 122.353 483.061 116.068C477.119 109.587 474.148 101.436 474.148 91.6162C474.148 78.8503 478.902 68.7357 488.409 61.2725C498.115 53.613 510.494 49.7832 525.548 49.7832C546.544 49.7832 563.38 57.2464 576.057 72.1727L559.122 91.3216C549.614 81.5017 538.225 76.5917 524.954 76.5917C511.683 76.5917 505.047 81.2071 505.047 90.4378C505.047 93.973 506.434 97.0172 509.207 99.5704C511.98 101.927 517.031 104.579 524.36 107.525L538.324 113.122C552.387 119.014 562.489 125.299 568.629 131.976C574.968 138.457 578.137 146.706 578.137 156.722C578.137 170.667 572.987 181.567 562.687 189.423C552.387 197.083 539.512 200.912 524.062 200.912C499.303 200.912 479.694 191.583 465.234 172.925Z" fill="white"/><path d="M442.119 107.533V200.912H411.115V111.667C411.115 101.627 408.162 93.5567 402.257 87.4544C396.548 81.1552 388.97 78.0056 379.521 78.0056C369.875 78.0056 361.903 81.1552 355.604 87.4544C349.501 93.7535 346.45 101.824 346.45 111.667V200.912H315.447V49.7832H344.383V67.3758C355.407 55.7617 369.875 49.9547 387.789 49.9547C404.521 49.9547 417.71 55.1711 427.355 65.6041C437.198 76.0371 442.119 90.0134 442.119 107.533Z" fill="white"/><path d="M0 172.925L17.6863 153.482C30.8528 167.23 44.4123 174.104 58.3648 174.104C65.2428 174.104 70.8435 172.729 75.1668 169.979C79.4901 167.033 81.6518 163.007 81.6518 157.901C81.6518 153.973 80.1779 150.831 77.2302 148.474C74.2825 145.921 68.9766 143.073 61.3125 139.93L46.5739 133.744C33.4075 128.245 23.7783 122.353 17.6863 116.068C11.7909 109.587 8.84315 101.436 8.84315 91.6162C8.84315 78.8503 13.5595 68.7357 22.9922 61.2725C32.6214 53.613 44.9036 49.7832 59.8387 49.7832C80.6692 49.7832 97.373 57.2464 109.95 72.1727L93.1479 91.3216C83.7152 81.5017 72.4156 76.5917 59.2491 76.5917C46.0827 76.5917 39.4994 81.2071 39.4994 90.4378C39.4994 93.973 40.875 97.0172 43.6262 99.5704C46.3774 101.927 51.3886 104.579 58.6596 107.525L72.5139 113.122C86.4664 119.014 96.4886 125.299 102.581 131.976C108.869 138.457 112.013 146.706 112.013 156.722C112.013 170.667 106.904 181.567 96.6852 189.423C86.4664 197.083 73.693 200.912 58.3648 200.912C33.8005 200.912 14.3456 191.583 0 172.925Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M179.068 157.202C170.656 148.687 165.956 137.241 165.956 121.305H135.129C135.129 144.147 142.207 163.982 157.36 179.235L157.45 179.326L157.543 179.416C172.746 194.217 191.993 201.314 214.026 201.314C235.823 201.314 254.809 194.01 269.762 178.983C285.088 163.784 292.333 144.054 292.333 121.305H261.506C261.506 136.972 256.757 148.334 248.099 156.906L248.054 156.951L248.009 156.996C239.346 165.715 228.428 170.284 214.026 170.284C199.104 170.284 187.867 165.724 179.068 157.202Z" fill="white"/>
+    </svg>
+  </a>
+  <div class="header-contacts">
+    <a href="tel:+74953203206" class="contact-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      <span class="contact-text">+7 (495) 320-32-06</span>
+    </a>
+    <span>·</span>
+    <a href="https://t.me/Sunscrypt_manager" target="_blank" class="contact-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+      <span class="contact-text">Telegram</span>
+    </a>
+    <span>·</span>
+    <a href="https://wa.me/79260823603" target="_blank" class="contact-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      <span class="contact-text">WhatsApp</span>
+    </a>
+  </div>
+</header>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+  <!-- Фирменный фоновый паттерн из брендбука -->
+  <div class="hero-brand-pattern" aria-hidden="true">
+    <svg width="100%" height="100%" viewBox="0 0 1647 1440" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <g clip-path="url(#heroClip)">
+        <path d="M-1203.8 1889.95L15.1256 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M-1068.22 1889.95L150.704 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M-932.64 1889.95L286.283 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M-797.062 1889.95L421.86 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M-662.197 1889.95L556.725 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M-525.906 1889.95L693.017 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M-389.616 1889.95L829.307 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M-254.751 1889.95L964.172 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M-119.885 1889.95L1099.04 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M16.4058 1889.95L1235.33 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M151.984 1889.95L1370.91 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M286.849 1889.95L1505.77 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M423.853 1889.95L1642.78 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M558.718 1889.95L1777.64 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M693.584 1889.95L1912.51 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M829.875 1889.24L2048.8 -222" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M965.453 1889.95L2184.38 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M1101.03 1889.95L2319.95 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M1236.61 1889.95L2455.53 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M1372.19 1889.95L2591.11 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <path d="M1507.77 1889.95L2726.69 -221.287" stroke="#ffffff" stroke-width="0.6" stroke-dasharray="14 14" opacity="0.04"/>
+        <!-- Blue accent rectangles from brand -->
+        <rect x="593.246" y="196.346" width="460.699" height="344.89" transform="rotate(-60 593.246 196.346)" stroke="url(#hg4)" stroke-width="3" opacity="0.18"/>
+        <rect x="333.721" y="639.893" width="394.367" height="230.807" transform="rotate(-60 333.721 639.893)" stroke="url(#hg9)" stroke-width="3" opacity="0.12"/>
+        <rect x="1178.84" y="820.618" width="634.459" height="230.307" transform="rotate(-60 1178.84 820.618)" stroke="url(#hg12)" stroke-width="3" opacity="0.15"/>
+        <rect x="806.403" y="761.178" width="720.378" height="112.867" transform="rotate(-60 806.403 761.178)" stroke="url(#hg13)" stroke-width="3" opacity="0.12"/>
+        <defs>
+          <linearGradient id="hg4" x1="1052.68" y1="328.373" x2="594.351" y2="328.834" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#0036FF"/><stop offset="1" stop-color="#00C2FF"/>
+          </linearGradient>
+          <linearGradient id="hg9" x1="727.197" y1="729.039" x2="334.251" y2="729.542" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#595959"/><stop offset="1" stop-color="#1D1D1D"/>
+          </linearGradient>
+          <linearGradient id="hg12" x1="1183.9" y1="948.059" x2="1770.1" y2="933.545" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#0036FF"/><stop offset="1" stop-color="#00C2FF"/>
+          </linearGradient>
+          <linearGradient id="hg13" x1="1524.05" y1="805.993" x2="809.771" y2="809.328" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#0036FF"/><stop offset="1" stop-color="#00EEAA"/>
+          </linearGradient>
+          <clipPath id="heroClip"><rect width="1647" height="1440" fill="white"/></clipPath>
+        </defs>
+      </g>
+    </svg>
+  </div>
+
+  <div class="hero-logo-block">
+    <svg height="36" viewBox="0 0 901 506" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="393.354" y="188.422" width="153.093" height="42.8362" transform="rotate(-60 393.354 188.422)" fill="url(#heroLogoGrad)"/>
+      <path d="M435.356 0C397.108 0 361.765 20.4051 342.641 53.5289L297 132.582L334.097 154.001L398.278 42.8362H526.72V0H435.356Z" fill="white"/>
+      <path d="M557.626 211.977C538.504 245.106 503.158 265.516 464.906 265.516H373.631V222.68H501.972L566.254 111.34L603.351 132.758L557.626 211.977Z" fill="white"/>
+      <path d="M901 451.219V469.219C894.003 470.702 888.149 471.444 883.439 471.444C871.866 471.444 862.85 468.545 856.391 462.747C850.066 456.949 846.904 448.32 846.904 436.858V386.266H830.756V367.861H846.904V334.098H868.3V367.861H897.771V386.266H868.3V435.038C868.3 441.241 869.848 445.69 872.943 448.387C876.173 450.949 881.152 452.23 887.88 452.23C890.168 452.23 894.541 451.893 901 451.219Z" fill="white"/>
+      <path d="M814.955 419.685C814.955 434.453 810.323 446.805 801.059 456.74C791.93 466.541 780.384 471.442 766.421 471.442C752.727 471.442 741.718 466.675 733.394 457.143V505.476H712.249V368.047H731.985V384.241C739.503 373.5 750.982 368.13 766.421 368.13C780.384 368.13 791.93 373.097 801.059 383.032C810.323 392.833 814.955 405.051 814.955 419.685ZM784.546 443.046C790.319 437.004 793.205 429.284 793.205 419.886C793.205 410.488 790.319 402.768 784.546 396.727C778.773 390.551 771.59 387.463 762.998 387.463C754.674 387.463 747.625 390.282 741.852 395.921C736.079 401.56 733.193 409.481 733.193 419.685C733.193 430.023 736.079 438.011 741.852 443.65C747.625 449.289 754.674 452.108 762.998 452.108C771.59 452.108 778.773 449.088 784.546 443.046Z" fill="white"/>
+      <path d="M673.893 368.131H696.449L648.317 478.29C644.155 487.688 639.188 494.535 633.415 498.831C627.641 503.262 620.526 505.477 612.067 505.477C606.429 505.477 600.991 504.806 595.755 503.463V485.54C601.26 486.077 605.153 486.345 607.436 486.345C617.639 486.345 624.822 481.512 628.984 471.845L633.012 462.582L593.54 368.131H616.297L644.692 440.026L673.893 368.131Z" fill="white"/>
+      <path d="M577.739 370.178V388.95H571.28C562.668 388.95 555.67 391.372 550.287 396.217C544.905 401.061 542.213 407.79 542.213 416.402V471.444H521.019V368.131H540.8V383.096C548.202 373.811 557.823 369.169 569.665 369.169C572.357 369.169 575.048 369.505 577.739 370.178Z" fill="white"/>
+      <path d="M411.029 419.692C410.76 405.596 415.87 393.447 426.358 383.244C436.845 372.907 449.215 367.873 463.468 368.141C482.023 368.141 495.939 375.793 505.217 391.097L490.292 402.777C483.3 392.708 474.426 387.674 463.67 387.674C454.795 387.674 447.4 390.762 441.484 396.937C435.568 403.113 432.61 410.698 432.61 419.692C432.61 428.821 435.568 436.473 441.484 442.648C447.4 448.824 454.795 451.911 463.67 451.911C474.157 451.911 483.032 446.944 490.292 437.01L505.217 448.488C500.78 455.738 494.931 461.376 487.67 465.403C480.41 469.431 472.342 471.444 463.468 471.444C448.812 471.444 436.375 466.41 426.156 456.342C416.072 446.273 411.029 434.057 411.029 419.692Z" fill="white"/>
+      <path d="M318.039 452.312L330.225 439.021C339.297 448.419 348.64 453.118 358.254 453.118C362.993 453.118 366.852 452.178 369.831 450.298C372.81 448.284 374.3 445.532 374.3 442.041C374.3 439.356 373.284 437.208 371.253 435.597C369.222 433.851 365.566 431.905 360.285 429.757L350.13 425.527C341.058 421.768 334.423 417.74 330.225 413.444C326.163 409.013 324.132 403.441 324.132 396.728C324.132 388.001 327.382 381.087 333.881 375.985C340.516 370.749 348.979 368.131 359.27 368.131C373.623 368.131 385.132 373.233 393.798 383.437L382.221 396.527C375.722 389.814 367.936 386.457 358.863 386.457C349.791 386.457 345.255 389.613 345.255 395.923C345.255 398.34 346.203 400.421 348.099 402.166C349.994 403.777 353.447 405.59 358.457 407.604L368.003 411.43C377.617 415.458 384.523 419.754 388.72 424.319C393.053 428.75 395.22 434.389 395.22 441.236C395.22 450.768 391.699 458.22 384.658 463.59C377.617 468.826 368.816 471.444 358.254 471.444C341.328 471.444 327.923 465.067 318.039 452.312Z" fill="white"/>
+      <path d="M302.238 407.609V471.444H281.044V410.435C281.044 403.572 279.025 398.055 274.988 393.883C271.086 389.577 265.905 387.424 259.446 387.424C252.852 387.424 247.402 389.577 243.095 393.883C238.924 398.189 236.838 403.707 236.838 410.435V471.444H215.644V368.131H235.425V380.157C242.961 372.218 252.852 368.248 265.097 368.248C276.536 368.248 285.552 371.814 292.146 378.946C298.874 386.078 302.238 395.633 302.238 407.609Z" fill="white"/>
+      <path d="M0 452.312L12.0906 439.021C21.0913 448.419 30.3608 453.118 39.8989 453.118C44.6008 453.118 48.4294 452.178 51.3849 450.298C54.3404 448.285 55.8181 445.532 55.8181 442.041C55.8181 439.356 54.8106 437.208 52.7955 435.597C50.7804 433.851 47.1532 431.905 41.914 429.757L31.8385 425.527C22.8377 421.768 16.2551 417.74 12.0906 413.444C8.06038 409.013 6.04528 403.441 6.04528 396.728C6.04528 388.001 9.26944 381.087 15.7177 375.985C22.3004 370.749 30.6966 368.131 40.9064 368.131C55.1464 368.131 66.5653 373.233 75.163 383.437L63.677 396.527C57.2287 389.814 49.5042 386.457 40.5034 386.457C31.5026 386.457 27.0023 389.613 27.0023 395.923C27.0023 398.34 27.9426 400.421 29.8234 402.166C31.7042 403.777 35.1298 405.59 40.1004 407.604L49.5713 411.43C59.1095 415.458 65.9608 419.754 70.1253 424.319C74.4242 428.75 76.5736 434.389 76.5736 441.236C76.5736 450.768 73.0808 458.22 66.0951 463.59C59.1094 468.826 50.3774 471.444 39.8989 471.444C23.1064 471.444 9.8068 465.067 0 452.312Z" fill="white"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M122.412 441.563C116.662 435.742 113.449 427.918 113.449 417.023H92.375C92.375 432.639 97.2136 446.198 107.572 456.625L107.634 456.687L107.698 456.749C118.091 466.867 131.248 471.719 146.31 471.719C161.211 471.719 174.19 466.725 184.412 456.453C194.889 446.063 199.842 432.575 199.842 417.023H178.768C178.768 427.734 175.522 435.501 169.603 441.361L169.572 441.391L169.541 441.422C163.619 447.383 156.156 450.507 146.31 450.507C136.11 450.507 128.427 447.389 122.412 441.563Z" fill="white"/>
+      <defs>
+        <linearGradient id="heroLogoGrad" x1="545.585" y1="204.523" x2="394.681" y2="204.93" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#0036FF"/><stop offset="1" stop-color="#00C2FF"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Безопасность · Знания · Сообщество</p>
+    <h1>Надёжный партнёр<br>в мире <em>цифровых</em><br>активов</h1>
+    <p class="hero-sub">Аппаратные кошельки, обмен криптовалюты, обучение и защита ваших активов. Оффлайн шоурум в Москве, работаем по всей России</p>
+    <div class="hero-ctas">
+      <a href="#products" class="btn-primary">Продукты и услуги</a>
+      <a href="#giveaway" class="btn-outline">Участвовать в розыгрыше</a>
+    </div>
+  </div>
+
+
+</section>
+
+<!-- ═══════════════ PRODUCTS ═══════════════ -->
+<section id="products">
+  <!-- WALLET STORE -->
+  <p class="section-label">Магазин Sunscrypt</p>
+  <div class="product-card">
+    <div class="product-card-inner">
+      <div class="product-visual">
+        <img src="showroom1.PNG" alt="Шоурум Sunscrypt" style="width:100%;height:auto;display:block;">
+      </div>
+      <div class="product-content">
+        <h3 class="product-title">Аппаратные кошельки</h3>
+        <p style="font-size:14px;color:rgba(255,255,255,0.65);margin-bottom:16px;line-height:1.6;">а также ключи двухфакторной аутентификации, пластины для хранения сид-фраз, аксессуары</p>
+
+        <div class="brands-row">
+          <span class="brand-tag brand-tag--blue">Tangem</span>
+          <span class="brand-tag brand-tag--blue">Keystone</span>
+          <span class="brand-tag brand-tag--blue">Ledger</span>
+          <span class="brand-tag brand-tag--blue">Trezor</span>
+          <span class="brand-tag brand-tag--blue">SafePal</span>
+          <span class="brand-tag brand-tag--blue">и другие</span>
+        </div>
+
+        <p class="product-subtitle" style="margin-top:16px;">Шоурум в Москве · Доставка по РФ</p>
+
+        <div class="features-list">
+          <p style="font-weight:600; margin-bottom:10px; color:#fff;">Профессиональные консультанты расскажут</p>
+          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:8px;">
+            <li class="features-list__item">Какой кошелёк подойдёт именно вам — с учётом задач, опыта и бюджета</li>
+            <li class="features-list__item">В чём различия популярных моделей и какие функции действительно важны</li>
+            <li class="features-list__item">Как защитить свои активы и избежать типичных ошибок</li>
+          </ul>
+          <p style="margin-top:14px; color:rgba(255,255,255,0.55); font-size:14px;">Предоставляем техподдержку и гарантию 1 год на все устройства</p>
+        </div>
+
+        <div class="product-ctas">
+          <a href="https://sunscrypt.ru" target="_blank" class="btn-primary">Выбрать кошелёк</a>
+          <button class="btn-outline" onclick="openModal('modal-wallet')">Записаться на консультацию</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXCHANGE -->
+  <p class="section-label" style="margin-top:40px;">Обменник</p>
+  <div class="product-card">
+    <div class="product-card-inner">
+      <div class="product-content" style="padding-top:28px;padding-bottom:28px;">
+        <h3 class="product-title">Sunscrypt Exchange</h3>
+        <p class="product-subtitle">Наличные и онлайн · Рыночный курс</p>
+
+        <ul class="features-list" style="margin-bottom:32px;">
+          <li><span style="display:inline;">Удобно — обмен фиата на криптовалюту в 50+ странах, на связи ежедневно с 9:00 до 22:00</span></li>
+          <li><span style="display:inline;">Международные переводы — SWIFT/SEPA, ВЭД, Китай (CNY, Alipay/WeChat)</span></li>
+          <li><span style="display:inline;">Зарубежные карты и сервисы — Wise, Revolut, Zelle и другие</span></li>
+          <li><span style="display:inline;">Недвижимость — помощь с покупкой и продажей за рубежом</span></li>
+        </ul>
+
+        <div class="product-ctas">
+          <a href="https://t.me/sunscrypt_bot" target="_blank" class="btn-primary">Перейти в обменник</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p class="section-label" id="academy" style="margin-top:40px;">Обучение</p>
+  <div class="product-card">
+    <div class="product-card-inner">
+      <div class="product-visual">
+        <img src="sundemy.jpg" alt="Академия Sundemy" loading="lazy" style="width:100%;height:auto;display:block;">
+      </div>
+      <div class="product-content">
+        <h3 class="product-title">Академия Sundemy</h3>
+        <p style="font-size:14px;color:rgba(255,255,255,0.65);margin-bottom:16px;line-height:1.6;">Освойте DeFi, Web3 и управление цифровыми активами — от основ до продвинутых стратегий</p>
+        <p class="product-subtitle">Практические задания, живые эфиры с экспертами и поддержка куратора на всём пути обучения</p>
+        <div class="product-ctas">
+          <button class="btn-primary" onclick="openModal('modal-academy')">Записаться в лист ожидания</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SERVICES ═══════════════ -->
+<section id="services">
+  <p class="section-label">Экспертная помощь</p>
+  <h2 class="section-title">Персональные услуги</h2>
+  <p class="section-sub">Решаем нестандартные задачи — там, где нужен опытный взгляд и живое участие</p>
+
+  <div class="services-grid">
+    <!-- Service 1 -->
+    <div class="service-card">
+      <div class="service-header">
+        <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3 class="service-title">Индивидуальные консультации</h3>
+      </div>
+      <p class="service-desc">Комплексная настройка аппаратных кошельков, первые шаги в криптовалюте, продвинутые стратегии хранения и диверсификации активов, вопросы безопасности — запишем на консультацию со специалистом под ваш запрос</p>
+      <button class="btn-ghost" onclick="openModal('modal-consult')">Записаться →</button>
+    </div>
+
+    <!-- Service 2 -->
+    <div class="service-card">
+      <div class="service-header">
+        <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+        <h3 class="service-title">Восстановление сид-фразы</h3>
+      </div>
+      <p class="service-desc">Помогаем восстановить доступ к кошельку, если сид-фраза частично утеряна, перепутана или повреждена. Гарантируем конфиденциальность и безопасность данных</p>
+      <button class="btn-ghost" onclick="openModal('modal-seed')">Получить помощь →</button>
+    </div>
+
+    <!-- Service 3 -->
+    <div class="service-card">
+      <div class="service-header">
+        <div class="service-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 class="service-title">Помощь при мошенничестве</h3>
+      </div>
+      <p class="service-desc">Разбираем ситуацию при скаме, фишинге или несанкционированном доступе. Помогаем составить заявление в правоохранительные органы, защитить оставшиеся активы и выстроить безопасную стратегию</p>
+      <button class="btn-ghost" onclick="openModal('modal-fraud')">Описать ситуацию →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ BUSINESS ═══════════════ -->
+<section id="business">
+  <h2 class="section-title">Работаем с бизнесом</h2>
+  <p class="section-sub">Корпоративные закупки, партнёрство в медиа и нестандартные запросы — обсудим условия</p>
+
+  <div class="business-grid">
+    <div class="business-card" onclick="openModal('modal-business', '/опт')">
+      <div class="business-card-header">
+        <div class="business-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+        <h3 class="business-card-title">Оптовые закупки</h3>
+      </div>
+      <p class="business-card-desc">Аппаратные кошельки для корпоративных клиентов. Специальные цены в зависимости от объёма</p>
+      <span class="btn-ghost">Оставить запрос →</span>
+    </div>
+    <div class="business-card" onclick="openModal('modal-business', '/медиа')">
+      <div class="business-card-header">
+        <div class="business-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg></div>
+        <h3 class="business-card-title">Медиасотрудничество</h3>
+      </div>
+      <p class="business-card-desc">Совместные проекты, мероприятия, интеграции</p>
+      <span class="btn-ghost">Обсудить →</span>
+    </div>
+    <div class="business-card" onclick="openModal('modal-business', '/другое')">
+      <div class="business-card-header">
+        <div class="business-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3 class="business-card-title">Другое</h3>
+      </div>
+      <p class="business-card-desc">Нестандартные запросы и партнёрские предложения. Расскажите о вашей задаче — найдём формат</p>
+      <span class="btn-ghost">Написать →</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ MEDIA ═══════════════ -->
+<section id="media">
+  <div class="media-content">
+    <p class="section-label">Комьюнити</p>
+    <h2 class="media-tagline">Сильное сообщество</h2>
+    <p class="media-sub">Мы создаём пространство, где можно учиться, общаться и развиваться в мире цифровых активов</p>
+    <div class="media-links">
+      <a href="https://www.youtube.com/@sunscrypt2140/videos" target="_blank" class="media-link">
+        <div class="media-link-label">YouTube · более 60 тыс. подписчиков</div>
+        <div class="media-link-icon" style="background:#FF0000;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </div>
+        <div class="media-link-name">Sunscrypt</div>
+        <div class="media-link-desc">Образовательные видео про криптовалюту, цифровую гигиену и Web3</div>
+      </a>
+      <a href="https://t.me/VladimirAbovyan" target="_blank" class="media-link">
+        <div class="media-link-label">Телеграм · более 10 тыс. подписчиков</div>
+        <div class="media-link-icon" style="background:#0088cc;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </div>
+        <div class="media-link-name">@VladimirAbovyan</div>
+        <div class="media-link-desc">Стратегии, чек-листы, новости — честно об удачах и неудачах</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ GIVEAWAY ═══════════════ -->
+<section id="giveaway">
+  <div class="giveaway-inner">
+    <div class="giveaway-header">
+      <div>
+        <p class="section-label">Участие бесплатное</p>
+        <h2 class="section-title">Розыгрыш</h2>
+        <div class="divider"></div>
+        <p class="section-sub" style="margin-bottom:20px;">Зарегистрируйтесь чтобы принять участие в розыгрыше призов от Tangem и Sunscrypt</p>
+
+        <p style="font-size:13px; letter-spacing:0.1em; text-transform:uppercase; color:var(--label); margin-bottom:16px;">Призы</p>
+        <div class="giveaway-prizes">
+          <div class="prize-item"><div class="prize-dot"></div><div class="prize-text">10 кошельков Tangem 2.0 на 3 карты</div></div>
+          <div class="prize-item"><div class="prize-dot"></div><div class="prize-text">Скидки от 10% до 30% на покупки устройств Tangem</div></div>
+          <div class="prize-item"><div class="prize-dot"></div><div class="prize-text">Скидки в обменнике Sunscrypt Exchange</div></div>
+          <div class="prize-item"><div class="prize-dot"></div><div class="prize-text">Призы от Tangem — наклейки, брелки, футболки и другое</div></div>
+        </div>
+      </div>
+
+      <div class="giveaway-form">
+        <h3 class="form-title" style="margin-bottom:20px;">Участвовать в розыгрыше</h3>
+        <form onsubmit="handleSubmit(event, 'giveaway-form')">
+          <input type="hidden" name="tags" value="/розыгрыш">
+          <div class="form-group">
+            <label>Имя <span>*</span></label>
+            <input type="text" name="name" class="form-control" placeholder="Ваше имя" required>
+          </div>
+          <div class="form-group">
+            <label>Телефон <span>*</span></label>
+            <input type="tel" name="phone" class="form-control" placeholder="+7 (___) ___-__-__" required>
+          </div>
+          <div class="form-group">
+            <label>Telegram / Email <span>*</span></label>
+            <input type="text" name="contact" class="form-control" placeholder="@username или email" required>
+          </div>
+          <div class="form-group">
+            <label style="text-transform:none;color:var(--label);letter-spacing:0;font-size:15px;font-weight:400;margin-top:8px;margin-bottom:12px;">Мне интересно узнать больше о...</label>
+            <div class="checkbox-group">
+              <label class="checkbox-label"><input type="checkbox" data-tag="/кошельки"> Аппаратные кошельки</label>
+              <label class="checkbox-label"><input type="checkbox" data-tag="/академия"> Академия</label>
+              <label class="checkbox-label"><input type="checkbox" data-tag="/консультация"> Индивидуальные консультации</label>
+              <label class="checkbox-label"><input type="checkbox" data-tag="/сид"> Восстановление сид-фразы</label>
+              <label class="checkbox-label"><input type="checkbox" data-tag="/скам"> Помощь при мошенничестве</label>
+              <label class="checkbox-label"><input type="checkbox" data-tag="/опт"> Оптовые закупки</label>
+              <label class="checkbox-label"><input type="checkbox" data-tag="/медиа"> Медиа</label>
+              <label class="checkbox-label"><input type="checkbox" data-tag="/другое"> Другое</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea name="comment" class="form-control" placeholder="Вопрос, пожелание или запрос..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Получить приз</button>
+          <div class="success-msg" id="giveaway-form-success">Обратитесь к сотруднику для получения приза</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-logo" style="display:none;">
+    <svg height="32" viewBox="0 0 901 506" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="393.354" y="188.422" width="153.093" height="42.8362" transform="rotate(-60 393.354 188.422)" fill="url(#footerGrad)"/>
+      <path d="M435.356 0C397.108 0 361.765 20.4051 342.641 53.5289L297 132.582L334.097 154.001L398.278 42.8362H526.72V0H435.356Z" fill="white"/>
+      <path d="M557.626 211.977C538.504 245.106 503.158 265.516 464.906 265.516H373.631V222.68H501.972L566.254 111.34L603.351 132.758L557.626 211.977Z" fill="white"/>
+      <path d="M901 451.219V469.219C894.003 470.702 888.149 471.444 883.439 471.444C871.866 471.444 862.85 468.545 856.391 462.747C850.066 456.949 846.904 448.32 846.904 436.858V386.266H830.756V367.861H846.904V334.098H868.3V367.861H897.771V386.266H868.3V435.038C868.3 441.241 869.848 445.69 872.943 448.387C876.173 450.949 881.152 452.23 887.88 452.23C890.168 452.23 894.541 451.893 901 451.219Z" fill="white"/>
+      <path d="M814.955 419.685C814.955 434.453 810.323 446.805 801.059 456.74C791.93 466.541 780.384 471.442 766.421 471.442C752.727 471.442 741.718 466.675 733.394 457.143V505.476H712.249V368.047H731.985V384.241C739.503 373.5 750.982 368.13 766.421 368.13C780.384 368.13 791.93 373.097 801.059 383.032C810.323 392.833 814.955 405.051 814.955 419.685ZM784.546 443.046C790.319 437.004 793.205 429.284 793.205 419.886C793.205 410.488 790.319 402.768 784.546 396.727C778.773 390.551 771.59 387.463 762.998 387.463C754.674 387.463 747.625 390.282 741.852 395.921C736.079 401.56 733.193 409.481 733.193 419.685C733.193 430.023 736.079 438.011 741.852 443.65C747.625 449.289 754.674 452.108 762.998 452.108C771.59 452.108 778.773 449.088 784.546 443.046Z" fill="white"/>
+      <path d="M673.893 368.131H696.449L648.317 478.29C644.155 487.688 639.188 494.535 633.415 498.831C627.641 503.262 620.526 505.477 612.067 505.477C606.429 505.477 600.991 504.806 595.755 503.463V485.54C601.26 486.077 605.153 486.345 607.436 486.345C617.639 486.345 624.822 481.512 628.984 471.845L633.012 462.582L593.54 368.131H616.297L644.692 440.026L673.893 368.131Z" fill="white"/>
+      <path d="M577.739 370.178V388.95H571.28C562.668 388.95 555.67 391.372 550.287 396.217C544.905 401.061 542.213 407.79 542.213 416.402V471.444H521.019V368.131H540.8V383.096C548.202 373.811 557.823 369.169 569.665 369.169C572.357 369.169 575.048 369.505 577.739 370.178Z" fill="white"/>
+      <path d="M411.029 419.692C410.76 405.596 415.87 393.447 426.358 383.244C436.845 372.907 449.215 367.873 463.468 368.141C482.023 368.141 495.939 375.793 505.217 391.097L490.292 402.777C483.3 392.708 474.426 387.674 463.67 387.674C454.795 387.674 447.4 390.762 441.484 396.937C435.568 403.113 432.61 410.698 432.61 419.692C432.61 428.821 435.568 436.473 441.484 442.648C447.4 448.824 454.795 451.911 463.67 451.911C474.157 451.911 483.032 446.944 490.292 437.01L505.217 448.488C500.78 455.738 494.931 461.376 487.67 465.403C480.41 469.431 472.342 471.444 463.468 471.444C448.812 471.444 436.375 466.41 426.156 456.342C416.072 446.273 411.029 434.057 411.029 419.692Z" fill="white"/>
+      <path d="M318.039 452.312L330.225 439.021C339.297 448.419 348.64 453.118 358.254 453.118C362.993 453.118 366.852 452.178 369.831 450.298C372.81 448.284 374.3 445.532 374.3 442.041C374.3 439.356 373.284 437.208 371.253 435.597C369.222 433.851 365.566 431.905 360.285 429.757L350.13 425.527C341.058 421.768 334.423 417.74 330.225 413.444C326.163 409.013 324.132 403.441 324.132 396.728C324.132 388.001 327.382 381.087 333.881 375.985C340.516 370.749 348.979 368.131 359.27 368.131C373.623 368.131 385.132 373.233 393.798 383.437L382.221 396.527C375.722 389.814 367.936 386.457 358.863 386.457C349.791 386.457 345.255 389.613 345.255 395.923C345.255 398.34 346.203 400.421 348.099 402.166C349.994 403.777 353.447 405.59 358.457 407.604L368.003 411.43C377.617 415.458 384.523 419.754 388.72 424.319C393.053 428.75 395.22 434.389 395.22 441.236C395.22 450.768 391.699 458.22 384.658 463.59C377.617 468.826 368.816 471.444 358.254 471.444C341.328 471.444 327.923 465.067 318.039 452.312Z" fill="white"/>
+      <path d="M302.238 407.609V471.444H281.044V410.435C281.044 403.572 279.025 398.055 274.988 393.883C271.086 389.577 265.905 387.424 259.446 387.424C252.852 387.424 247.402 389.577 243.095 393.883C238.924 398.189 236.838 403.707 236.838 410.435V471.444H215.644V368.131H235.425V380.157C242.961 372.218 252.852 368.248 265.097 368.248C276.536 368.248 285.552 371.814 292.146 378.946C298.874 386.078 302.238 395.633 302.238 407.609Z" fill="white"/>
+      <path d="M0 452.312L12.0906 439.021C21.0913 448.419 30.3608 453.118 39.8989 453.118C44.6008 453.118 48.4294 452.178 51.3849 450.298C54.3404 448.285 55.8181 445.532 55.8181 442.041C55.8181 439.356 54.8106 437.208 52.7955 435.597C50.7804 433.851 47.1532 431.905 41.914 429.757L31.8385 425.527C22.8377 421.768 16.2551 417.74 12.0906 413.444C8.06038 409.013 6.04528 403.441 6.04528 396.728C6.04528 388.001 9.26944 381.087 15.7177 375.985C22.3004 370.749 30.6966 368.131 40.9064 368.131C55.1464 368.131 66.5653 373.233 75.163 383.437L63.677 396.527C57.2287 389.814 49.5042 386.457 40.5034 386.457C31.5026 386.457 27.0023 389.613 27.0023 395.923C27.0023 398.34 27.9426 400.421 29.8234 402.166C31.7042 403.777 35.1298 405.59 40.1004 407.604L49.5713 411.43C59.1095 415.458 65.9608 419.754 70.1253 424.319C74.4242 428.75 76.5736 434.389 76.5736 441.236C76.5736 450.768 73.0808 458.22 66.0951 463.59C59.1094 468.826 50.3774 471.444 39.8989 471.444C23.1064 471.444 9.8068 465.067 0 452.312Z" fill="white"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M122.412 441.563C116.662 435.742 113.449 427.918 113.449 417.023H92.375C92.375 432.639 97.2136 446.198 107.572 456.625L107.634 456.687L107.698 456.749C118.091 466.867 131.248 471.719 146.31 471.719C161.211 471.719 174.19 466.725 184.412 456.453C194.889 446.063 199.842 432.575 199.842 417.023H178.768C178.768 427.734 175.522 435.501 169.603 441.361L169.572 441.391L169.541 441.422C163.619 447.383 156.156 450.507 146.31 450.507C136.11 450.507 128.427 447.389 122.412 441.563Z" fill="white"/>
+      <defs>
+        <linearGradient id="footerGrad" x1="545.585" y1="204.523" x2="394.681" y2="204.93" gradientUnits="userSpaceOnUse">
+          <stop stop-color="#0036FF"/>
+          <stop offset="1" stop-color="#00C2FF"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+  <div class="footer-links" style="order:1;">
+    <a href="#">Политика конфиденциальности</a>
+    <a href="#">Пользовательское соглашение</a>
+  </div>
+  <div class="footer-copy" style="order:2;">© 2025 Sunscrypt. Все права защищены.</div>
+</footer>
+
+<!-- ═══════════════ MODALS ═══════════════ -->
+
+<!-- Modal: Academy Waitlist -->
+<div class="modal-overlay" id="modal-academy">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-academy')">✕</button>
+    <p class="form-eyebrow">Третий поток — скоро</p>
+    <h3 class="form-title">Записаться в лист ожидания</h3>
+    <p class="form-sub">Оставьте контакты — мы свяжемся, расскажем подробнее о программе и предложим специальные условия</p>
+    <form onsubmit="handleSubmit(event, 'academy-success')">
+      <input type="hidden" name="tags" value="/академия">
+      <div class="form-group"><label>Имя <span>*</span></label><input type="text" name="name" class="form-control" placeholder="Ваше имя" required></div>
+      <div class="form-group"><label>Телефон <span>*</span></label><input type="tel" name="phone" class="form-control" placeholder="+7 (___) ___-__-__" required></div>
+      <div class="form-group"><label>Telegram / Email <span>*</span></label><input type="text" name="contact" class="form-control" placeholder="@username или email" required></div>
+      <div class="form-group"><label>Комментарий</label><textarea name="comment" class="form-control" placeholder="Вопрос или пожелание..."></textarea></div>
+      <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Записаться в лист ожидания</button>
+      <div class="success-msg" id="academy-success">✓ Заявка принята. Мы свяжемся с вами первыми!</div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Wallet Consultation -->
+<div class="modal-overlay" id="modal-wallet">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-wallet')">✕</button>
+    <p class="form-eyebrow">Магазин кошельков</p>
+    <h3 class="form-title">Записаться на консультацию</h3>
+    <p class="form-sub">Поможем подобрать устройство под ваши задачи и бюджет</p>
+    <form onsubmit="handleSubmit(event, 'wallet-success')">
+      <input type="hidden" name="tags" value="/кошельки">
+      <div class="form-group"><label>Имя <span>*</span></label><input type="text" name="name" class="form-control" placeholder="Ваше имя" required></div>
+      <div class="form-group"><label>Телефон <span>*</span></label><input type="tel" name="phone" class="form-control" placeholder="+7 (___) ___-__-__" required></div>
+      <div class="form-group"><label>Telegram / Email <span>*</span></label><input type="text" name="contact" class="form-control" placeholder="@username или email" required></div>
+      <div class="form-group"><label>Комментарий</label><textarea name="comment" class="form-control" placeholder="Вопрос, пожелание или удобное время для связи..."></textarea></div>
+      <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Записаться</button>
+      <div class="success-msg" id="wallet-success">✓ Заявка принята. Свяжемся с вами в ближайшее время.</div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Seed Phrase -->
+<div class="modal-overlay" id="modal-seed">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-seed')">✕</button>
+    <p class="form-eyebrow">Восстановление доступа</p>
+    <h3 class="form-title">Помощь с сид-фразой</h3>
+    <p class="form-sub">Опишите ситуацию — специалист свяжется с вами конфиденциально</p>
+    <form onsubmit="handleSubmit(event, 'seed-success')">
+      <input type="hidden" name="tags" value="/сид">
+      <div class="form-group"><label>Имя <span>*</span></label><input type="text" name="name" class="form-control" placeholder="Ваше имя" required></div>
+      <div class="form-group"><label>Телефон <span>*</span></label><input type="tel" name="phone" class="form-control" placeholder="+7 (___) ___-__-__" required></div>
+      <div class="form-group"><label>Telegram / Email <span>*</span></label><input type="text" name="contact" class="form-control" placeholder="@username или email" required></div>
+      <div class="form-group"><label>Комментарий</label><textarea name="comment" class="form-control" placeholder="Опишите ситуацию..."></textarea></div>
+      <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Отправить запрос</button>
+      <div class="success-msg" id="seed-success">✓ Специалист свяжется с вами в ближайшее время.</div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Fraud -->
+<div class="modal-overlay" id="modal-fraud">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-fraud')">✕</button>
+    <p class="form-eyebrow">Экстренная помощь</p>
+    <h3 class="form-title">Столкнулись с мошенничеством?</h3>
+    <p class="form-sub">Разберём ситуацию и поможем защитить оставшиеся активы. Конфиденциально</p>
+    <form onsubmit="handleSubmit(event, 'fraud-success')">
+      <input type="hidden" name="tags" value="/скам">
+      <div class="form-group"><label>Имя <span>*</span></label><input type="text" name="name" class="form-control" placeholder="Ваше имя" required></div>
+      <div class="form-group"><label>Телефон <span>*</span></label><input type="tel" name="phone" class="form-control" placeholder="+7 (___) ___-__-__" required></div>
+      <div class="form-group"><label>Telegram / Email <span>*</span></label><input type="text" name="contact" class="form-control" placeholder="@username или email" required></div>
+      <div class="form-group"><label>Комментарий</label><textarea name="comment" class="form-control" placeholder="Опишите ситуацию..."></textarea></div>
+      <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Описать ситуацию</button>
+      <div class="success-msg" id="fraud-success">✓ Специалист свяжется с вами как можно скорее.</div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Consult (general) -->
+<div class="modal-overlay" id="modal-consult">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-consult')">✕</button>
+    <p class="form-eyebrow">Персональная услуга</p>
+    <h3 class="form-title">Индивидуальная консультация</h3>
+    <p class="form-sub">Задайте свой вопрос — эксперт разберёт именно вашу ситуацию</p>
+    <form onsubmit="handleSubmit(event, 'consult-success')">
+      <input type="hidden" name="tags" value="/консультация">
+      <div class="form-group"><label>Имя <span>*</span></label><input type="text" name="name" class="form-control" placeholder="Ваше имя" required></div>
+      <div class="form-group"><label>Телефон <span>*</span></label><input type="tel" name="phone" class="form-control" placeholder="+7 (___) ___-__-__" required></div>
+      <div class="form-group"><label>Telegram / Email <span>*</span></label><input type="text" name="contact" class="form-control" placeholder="@username или email" required></div>
+      <div class="form-group"><label>Комментарий</label><textarea name="comment" class="form-control" placeholder="Ваш вопрос или задача..."></textarea></div>
+      <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Записаться</button>
+      <div class="success-msg" id="consult-success">✓ Заявка принята.</div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal: Business -->
+<div class="modal-overlay" id="modal-business">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-business')">✕</button>
+    <p class="form-eyebrow">Для бизнеса</p>
+    <h3 class="form-title">Партнёрский запрос</h3>
+    <p class="form-sub">Опишите задачу — обсудим формат и условия сотрудничества</p>
+    <form onsubmit="handleSubmit(event, 'business-success')">
+      <input type="hidden" name="tags" value="/бизнес">
+      <div class="form-group"><label>Имя <span>*</span></label><input type="text" name="name" class="form-control" placeholder="Ваше имя или компания" required></div>
+      <div class="form-group"><label>Телефон <span>*</span></label><input type="tel" name="phone" class="form-control" placeholder="+7 (___) ___-__-__" required></div>
+      <div class="form-group"><label>Telegram / Email <span>*</span></label><input type="text" name="contact" class="form-control" placeholder="@username или email" required></div>
+      <div class="form-group"><label>Комментарий</label><textarea name="comment" class="form-control" placeholder="Объём, задача, предложение..."></textarea></div>
+      <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">Отправить запрос</button>
+      <div class="success-msg" id="business-success">✓ Запрос получен. Свяжемся в ближайшее время.</div>
+    </form>
+  </div>
+</div>
+
+<script>
+  function openModal(id, tag) {
+    const modal = document.getElementById(id);
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (tag) {
+      const tagsField = modal.querySelector('[name="tags"]');
+      if (tagsField) tagsField.value = tag;
+    }
+    // Сброс формы при повторном открытии после отправки
+    const form = modal.querySelector('form');
+    if (form) {
+      form.style.display = '';
+      form.reset();
+      const btn = form.querySelector('button[type="submit"]');
+      if (btn) { btn.disabled = false; btn.textContent = btn.dataset.originalText || btn.textContent; }
+    }
+    const successMsg = modal.querySelector('.success-msg');
+    if (successMsg) successMsg.style.display = 'none';
+    const eyebrow = modal.querySelector('.form-eyebrow');
+    if (eyebrow) eyebrow.style.display = '';
+    const title = modal.querySelector('.form-title');
+    if (title && title.dataset.originalText) title.textContent = title.dataset.originalText;
+    const sub = modal.querySelector('.form-sub');
+    if (sub) sub.style.display = '';
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if (e.target === overlay) closeModal(overlay.id);
+    });
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.active').forEach(m => closeModal(m.id));
+    }
+  });
+
+  function handleSubmit(event, successId) {
+    event.preventDefault();
+    const form = event.target;
+    const btn = form.querySelector('button[type="submit"]');
+    if (!btn.dataset.originalText) btn.dataset.originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Отправка...';
+
+    const data = {
+      name: (form.querySelector('[name="name"]') || {}).value || '',
+      phone: (form.querySelector('[name="phone"]') || {}).value || '',
+      contact: (form.querySelector('[name="contact"]') || {}).value || '',
+      comment: (form.querySelector('[name="comment"]') || {}).value || '',
+      tags: []
+    };
+
+    const hiddenTags = form.querySelector('[name="tags"]');
+    if (hiddenTags) data.tags.push(hiddenTags.value);
+
+    form.querySelectorAll('[data-tag]:checked').forEach(cb => {
+      data.tags.push(cb.dataset.tag);
+    });
+
+    fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(r => r.json())
+    .then(res => {
+      if (res.status !== 'ok') throw new Error(res.message || 'error');
+      showSuccess(form, successId);
+    })
+    .catch(() => {
+      showSuccess(form, successId);
+    });
+  }
+
+  function showSuccess(form, successId) {
+    form.style.display = 'none';
+    const msg = document.getElementById(successId);
+    if (msg) msg.style.display = 'block';
+
+    const container = form.parentElement;
+    const eyebrow = container.querySelector('.form-eyebrow');
+    const title = container.querySelector('.form-title');
+    const sub = container.querySelector('.form-sub');
+    if (eyebrow) eyebrow.style.display = 'none';
+    if (title) {
+      if (!title.dataset.originalText) title.dataset.originalText = title.textContent;
+      const isGiveaway = successId === 'giveaway-form';
+      title.textContent = isGiveaway ? 'Обратитесь к сотруднику для получения приза' : 'Заявка отправлена';
+      container.style.display = 'flex';
+      container.style.flexDirection = 'column';
+      container.style.justifyContent = 'center';
+    }
+    if (sub) sub.style.display = 'none';
+  }
+</script>
+</body>
+</html>
